@@ -1,0 +1,4665 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rust Programming Course</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #ffffff;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 2.5rem 0 1.2rem 0;
+            color: #000;
+            border-bottom: 3px solid #ff6b35;
+            padding-bottom: 0.4rem;
+            page-break-after: avoid;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 2rem 0 0.8rem 0;
+            color: #2c3e50;
+            page-break-after: avoid;
+        }
+
+        /* Force page breaks before Program sections */
+        .program-section {
+            page-break-before: always;
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.6rem 0;
+            color: #34495e;
+            page-break-after: avoid;
+        }
+
+        h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 1.2rem 0 0.5rem 0;
+            color: #34495e;
+            page-break-after: avoid;
+        }
+
+        p {
+            margin: 0.8rem 0;
+            text-align: justify;
+        }
+
+        code {
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            background: #f5f5f5;
+            padding: 0.15rem 0.35rem;
+            border-radius: 3px;
+            font-size: 0.85em;
+            color: #c7254e;
+        }
+
+        pre {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 1.2rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 1.2rem 0;
+            border-left: 4px solid #ff6b35;
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+            font-size: 0.85rem;
+        }
+
+        ul,
+        ol {
+            margin: 0.8rem 0 0.8rem 2rem;
+        }
+
+        li {
+            margin: 0.4rem 0;
+        }
+
+        hr {
+            border: none;
+            border-top: 2px solid #e0e0e0;
+            margin: 2rem 0;
+            page-break-after: avoid;
+        }
+
+        .lesson-divider {
+            page-break-before: always;
+            margin: 3rem 0 1.5rem 0;
+            text-align: center;
+            color: #999;
+            font-size: 0.85rem;
+        }
+
+        .toc {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0 3rem 0;
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        .toc h2 {
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+
+        .toc ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .toc li {
+            margin: 0.6rem 0;
+            font-size: 0.95rem;
+        }
+
+        .toc a {
+            color: #2c3e50;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .toc a:hover {
+            color: #ff6b35;
+        }
+
+        /* Section wrapper to prevent breaks */
+        .section {
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        @media print {
+            @page {
+                margin: 0.75in;
+                size: letter;
+            }
+
+            body {
+                max-width: 100%;
+                padding: 0;
+                font-size: 10pt;
+            }
+
+            h1 {
+                font-size: 18pt;
+                page-break-after: avoid;
+            }
+
+            h2 {
+                font-size: 14pt;
+                page-break-after: avoid;
+            }
+
+            h3 {
+                font-size: 12pt;
+                page-break-after: avoid;
+            }
+
+            h4 {
+                font-size: 11pt;
+                page-break-after: avoid;
+            }
+
+            .lesson-divider {
+                page-break-before: always;
+            }
+
+            pre {
+                page-break-inside: avoid;
+                break-inside: avoid;
+                font-size: 9pt;
+            }
+
+            .toc {
+                page-break-inside: avoid;
+                break-inside: avoid;
+                page-break-after: always;
+            }
+
+            /* Prevent orphans and widows */
+            p,
+            li {
+                orphans: 3;
+                widows: 3;
+            }
+
+            /* Keep code output with code block */
+            pre+h3,
+            pre+p {
+                page-break-before: avoid;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="text-align: center; border: none; font-size: 3rem; margin: 2rem 0;">🦀 Rust Programming Course</h1>
+    <p style="text-align: center; font-size: 1.2rem; color: #666; margin-bottom: 4rem;">A Comprehensive Introduction for
+        First-Year Students</p>
+
+    <div class="toc">
+        <h2>Table of Contents</h2>
+        <ul>
+            <li><a href="#lesson-1">Lesson 1: Rust Programming: A First-Year Introduction</a></li>
+            <li><a href="#lesson-2">Lesson 2: Rust Programming Lesson 10: Error Handling and Best Practices</a></li>
+            <li><a href="#lesson-3">Lesson 3: Rust Programming Lesson 2: Arithmetic Operations with Integers</a></li>
+            <li><a href="#lesson-4">Lesson 4: Rust Programming Lesson 3: Floating-Point Numbers and Type Conversion</a>
+            </li>
+            <li><a href="#lesson-5">Lesson 5: Rust Programming Lesson 4: Control Flow with if, else, and Loops</a></li>
+            <li><a href="#lesson-6">Lesson 6: Rust Programming Lesson 5: Loops, Arrays, Tuples, and Pattern Matching</a>
+            </li>
+            <li><a href="#lesson-7">Lesson 7: Rust Programming Lesson 6: Ownership, Borrowing, and References</a></li>
+            <li><a href="#lesson-8">Lesson 8: Rust Programming Lesson 7: Structs and Methods</a></li>
+            <li><a href="#lesson-9">Lesson 9: Rust Programming Lesson 8: Enums and Pattern Matching</a></li>
+            <li><a href="#lesson-10">Lesson 10: Rust Programming Lesson 9: Collections - Vectors, Strings, and
+                    HashMaps</a></li>
+        </ul>
+    </div>
+
+    <div id="lesson-1" style="page-break-before: always;">
+        <h1>Rust Programming: A First-Year Introduction</h1>
+
+        <p>Welcome to your first deep dive into Rust! In this lesson, we will explore four fundamental programs. Each
+            one is designed to teach you specific concepts of the language, from basic variables to recursion and
+            control flow.</p>
+
+        <p>Rust is a modern systems programming language focused on safety, speed, and concurrency. It might feel strict
+            at first, but it's designed to help you write bug-free code.</p>
+
+        <hr>
+
+        <h2>Program 1: Celsius to Fahrenheit Conversion 🌡️</h2>
+
+        <p>This simple program introduces you to the structure of a Rust application, variables, and basic arithmetic.
+        </p>
+
+        <pre><code class="language-rust">
+fn main() {
+    let celsius = 25.0; // Input temperature in Celsius
+    let fahrenheit = celsius * 1.8 + 32.0;
+    println!("{} Celsius is {} Fahrenheit", celsius, fahrenheit);
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <p>1. <strong><code>fn main()</code></strong>: This is the entry point of every Rust executable. Code execution
+            starts here.</p>
+        <p>2. <strong><code>let</code></strong>: We use the <code>let</code> keyword to declare variables. By default,
+            variables in Rust are <strong>immutable</strong>, meaning their values cannot be changed after assignment.
+        </p>
+        <ul>
+            <li><em>Note</em>: If we wanted to change <code>celsius</code> later, we would need to write
+                <code>let mut celsius = ...</code>.
+            </li>
+        </ul>
+
+        <hr>
+
+        <h2>Program 2: Check for Palindrome 🔄</h2>
+
+        <p>This program checks if a word reads the same forwards and backwards. It introduces functions, string
+            manipulation, and iterators.</p>
+
+        <pre><code class="language-rust">
+fn is_palindrome(text: &amp;str) -&gt; bool {
+    let reversed: String = text.chars().rev().collect();
+    text == reversed
+}
+
+fn main() {
+    let word1 = "level";
+    let word2 = "hello";
+    
+    println!("'{}' is a palindrome: {}", word1, is_palindrome(word1));
+    println!("'{}' is a palindrome: {}", word2, is_palindrome(word2));
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <p>1. <strong>Functions</strong>:</p>
+        <ul>
+            <li><code>fn is_palindrome(text: &str) -> bool</code>: This defines a function named
+                <code>is_palindrome</code>.
+            </li>
+            <li><code>text: &str</code>: It takes one argument named <code>text</code> of type <code>&str</code> (a
+                "string slice"). This is a view into a string, which is efficient because it doesn't copy the data.</li>
+            <li><code>-> bool</code>: It returns a boolean value (<code>true</code> or <code>false</code>).</li>
+            <li><code>text.chars()</code>: Turns the string slice into an iterator of characters.</li>
+            <li><code>.rev()</code>: Reverses the order of the iterator.</li>
+            <li><code>.collect()</code>: Consumes the iterator and builds a new collection (in this case, a
+                <code>String</code>).
+            </li>
+            <li><code>String</code>: An owned, growable text buffer (like <code>reversed</code>).</li>
+            <li><code>&str</code>: A borrowed view into string data (like <code>text</code>).</li>
+        </ul>
+
+        <hr>
+
+        <h2>Program 3: Factorial Calculation ❗</h2>
+
+        <p>This program calculates the factorial of a number (e.g., 5! = 5 <em> 4 </em> 3 <em> 2 </em> 1). It
+            demonstrates recursion and conditional logic.</p>
+
+        <pre><code class="language-rust">
+fn factorial(n: u64) -&gt; u64 {
+    if n == 0 {
+        1
+    } else {
+        n * factorial(n - 1)
+    }
+}
+
+fn main() {
+    let number = 5;
+    println!("The factorial of {} is {}", number, factorial(number));
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <p>1. <strong>Recursion</strong>: The function <code>factorial</code> calls itself. This is a common way to
+            solve problems that can be broken down into smaller, similar sub-problems.</p>
+        <p>2. <strong><code>u64</code></strong>: This stands for "unsigned 64-bit integer". It can only hold positive
+            numbers, which makes sense for a factorial input.</p>
+        <p>3. <strong>Expression-Based Control Flow</strong>:</p>
+        <ul>
+            <li>In many languages, <code>if</code> is a statement. In Rust, <code>if</code> is an
+                <strong>expression</strong>, meaning it returns a value.
+            </li>
+            <li>The entire <code>if/else</code> block evaluates to either <code>1</code> or the result of
+                <code>n * factorial(n - 1)</code>. This result is then returned by the function.
+            </li>
+        </ul>
+
+        <hr>
+
+        <h2>Program 4: Find the Largest of Three Numbers 🤔</h2>
+
+        <p>This program finds the maximum of three variables. It shows how to handle complex logic and control flow.</p>
+
+        <pre><code class="language-rust">
+fn main() {
+    let a = 10;
+    let b = 25;
+    let c = 15;
+    
+    let largest = if a &gt;= b &amp;&amp; a &gt;= c {
+        a
+    } else if b &gt;= a &amp;&amp; b &gt;= c {
+        b
+    } else {
+        c
+    };
+    
+    println!("The largest of {}, {}, and {} is {}", a, b, c, largest);
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <p>1. <strong><code>if</code> as an Expression (Again)</strong>:</p>
+        <ul>
+            <li>Here, we assign the result of the <code>if/else</code> chain directly to the variable
+                <code>largest</code>.
+            </li>
+            <li><code>let largest = if ... { ... } else { ... };</code></li>
+            <li>This is much cleaner than declaring <code>let mut largest;</code> and assigning it inside each block.
+            </li>
+            <li><code>&&</code>: The logical AND operator. Both conditions must be true.</li>
+            <li><code>>=</code>: Greater than or equal to.</li>
+        </ul>
+
+        <hr>
+
+        <h2>Summary & Exercises</h2>
+
+        <p>You've now seen four distinct Rust programs covering:</p>
+        <ul>
+            <li><strong>Variables & Math</strong>: How to store and manipulate numbers.</li>
+            <li><strong>Strings & Iterators</strong>: How to process text efficiently.</li>
+            <li><strong>Recursion</strong>: How to write functions that call themselves.</li>
+            <li><strong>Control Flow</strong>: How to make decisions in code.</li>
+        </ul>
+
+        <h3>Try It Yourself!</h3>
+        <p>1. <strong>Modify Program 1</strong>: Change the formula to convert Fahrenheit to Celsius.</p>
+        <p>2. <strong>Modify Program 2</strong>: Make the palindrome checker case-insensitive (so "Level" is also a
+            palindrome). <em>Hint: Look up <code>to_lowercase()</code>.</em></p>
+        <p>3. <strong>Modify Program 4</strong>: Add a fourth number <code>d</code> and find the largest of four.</p>
+
+        <p>Happy Coding! 🦀</p>
+
+    </div>
+    <div class="lesson-divider">• • •</div>
+    <div id="lesson-2">
+        <h1>Rust Programming Lesson 10: Error Handling and Best Practices</h1>
+
+        <p>Welcome to Lesson 10, the final lesson in this course! You've learned the fundamentals of Rust. Now let's
+            master error handling and explore best practices that will help you write robust, production-ready code.</p>
+
+        <h2>Program 1: Understanding panic!</h2>
+
+        <p>Sometimes errors are unrecoverable. The <code>panic!</code> macro stops execution immediately.</p>
+
+        <pre><code class="language-rust">
+fn main() {
+    println!("Starting program...");
+    
+    // Explicit panic
+    // panic!("This is a critical error!");
+    
+    // Panics from invalid operations
+    let v = vec![1, 2, 3];
+    // v[99]; // This would panic: index out of bounds
+    
+    // Division by zero panics
+    // let x = 5 / 0; // This would panic
+    
+    // Using unwrap (panics if None or Err)
+    let some_value = Some(42);
+    let value = some_value.unwrap();
+    println!("Value: {}", value);
+    
+    // This would panic:
+    // let none_value: Option&lt;i32&gt; = None;
+    // none_value.unwrap();
+    
+    // Using expect for better error messages
+    let result = Some(100);
+    let num = result.expect("Expected a number but got None");
+    println!("Number: {}", num);
+    
+    println!("Program completed successfully");
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>panic!</strong>: Unrecoverable errors that stop execution</li>
+            <li><strong>When to panic</strong>: Programming errors, invalid state, or impossible situations</li>
+            <li><strong>unwrap()</strong>: Gets value or panics</li>
+            <li><strong>expect()</strong>: Like unwrap but with custom message</li>
+            <li><strong>Backtrace</strong>: Set <code>RUST_BACKTRACE=1</code> to see where panic occurred</li>
+        </ul>
+
+        <h3>Output</h3>
+        <pre><code class="language-">
+Starting program...
+Value: 42
+Number: 100
+Program completed successfully
+</code></pre>
+
+        <hr>
+
+        <h2>Program 2: The ? Operator - Error Propagation</h2>
+
+        <p>The <code>?</code> operator makes error handling concise by propagating errors up the call stack.</p>
+
+        <pre><code class="language-rust">
+use std::fs::File;
+use std::io::{self, Read};
+
+fn read_username_from_file() -&gt; Result&lt;String, io::Error&gt; {
+    let mut file = File::open("username.txt")?; // Returns error if open fails
+    let mut username = String::new();
+    file.read_to_string(&amp;mut username)?; // Returns error if read fails
+    Ok(username)
+}
+
+fn read_number_from_string(s: &amp;str) -&gt; Result&lt;i32, std::num::ParseIntError&gt; {
+    let num = s.trim().parse::&lt;i32&gt;()?;
+    Ok(num)
+}
+
+fn divide(a: f64, b: f64) -&gt; Result&lt;f64, String&gt; {
+    if b == 0.0 {
+        Err(String::from("Division by zero"))
+    } else {
+        Ok(a / b)
+    }
+}
+
+fn calculate() -&gt; Result&lt;f64, String&gt; {
+    let x = divide(10.0, 2.0)?;
+    let y = divide(x, 0.0)?; // This will return the error
+    Ok(y)
+}
+
+fn main() {
+    // Using ? in a function that returns Result
+    match read_number_from_string("42") {
+        Ok(num) =&gt; println!("Parsed number: {}", num),
+        Err(e) =&gt; println!("Parse error: {}", e),
+    }
+    
+    match read_number_from_string("not a number") {
+        Ok(num) =&gt; println!("Parsed: {}", num),
+        Err(e) =&gt; println!("Parse error: {}", e),
+    }
+    
+    // Error propagation example
+    match calculate() {
+        Ok(result) =&gt; println!("Result: {}", result),
+        Err(e) =&gt; println!("Calculation error: {}", e),
+    }
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>? Operator</strong>: Returns error early if Result is Err</li>
+            <li><strong>Error Propagation</strong>: Passes errors up to caller</li>
+            <li><strong>Only in Result-returning functions</strong>: Can't use ? in main (unless main returns Result)
+            </li>
+            <li><strong>Cleaner Code</strong>: Replaces verbose match statements</li>
+            <li><strong>Early Return</strong>: Automatically returns on error</li>
+        </ul>
+
+        <h3>Output</h3>
+        <pre><code class="language-">
+Parsed number: 42
+Parse error: invalid digit found in string
+Calculation error: Division by zero
+</code></pre>
+
+        <hr>
+
+        <h2>Program 3: Custom Error Types</h2>
+
+        <p>Create your own error types for domain-specific errors.</p>
+
+        <pre><code class="language-rust">
+use std::fmt;
+
+#[derive(Debug)]
+enum MathError {
+    DivisionByZero,
+    NegativeSquareRoot,
+    Overflow,
+}
+
+impl fmt::Display for MathError {
+    fn fmt(&amp;self, f: &amp;mut fmt::Formatter) -&gt; fmt::Result {
+        match self {
+            MathError::DivisionByZero =&gt; write!(f, "Cannot divide by zero"),
+            MathError::NegativeSquareRoot =&gt; write!(f, "Cannot take square root of negative number"),
+            MathError::Overflow =&gt; write!(f, "Calculation resulted in overflow"),
+        }
+    }
+}
+
+fn safe_divide(a: f64, b: f64) -&gt; Result&lt;f64, MathError&gt; {
+    if b == 0.0 {
+        Err(MathError::DivisionByZero)
+    } else {
+        Ok(a / b)
+    }
+}
+
+fn safe_sqrt(x: f64) -&gt; Result&lt;f64, MathError&gt; {
+    if x &lt; 0.0 {
+        Err(MathError::NegativeSquareRoot)
+    } else {
+        Ok(x.sqrt())
+    }
+}
+
+fn complex_calculation(a: f64, b: f64) -&gt; Result&lt;f64, MathError&gt; {
+    let quotient = safe_divide(a, b)?;
+    let result = safe_sqrt(quotient)?;
+    Ok(result)
+}
+
+fn main() {
+    println!("=== Safe Math Operations ===\n");
+    
+    match safe_divide(10.0, 2.0) {
+        Ok(result) =&gt; println!("10 / 2 = {}", result),
+        Err(e) =&gt; println!("Error: {}", e),
+    }
+    
+    match safe_divide(10.0, 0.0) {
+        Ok(result) =&gt; println!("Result: {}", result),
+        Err(e) =&gt; println!("Error: {}", e),
+    }
+    
+    match safe_sqrt(16.0) {
+        Ok(result) =&gt; println!("√16 = {}", result),
+        Err(e) =&gt; println!("Error: {}", e),
+    }
+    
+    match safe_sqrt(-4.0) {
+        Ok(result) =&gt; println!("Result: {}", result),
+        Err(e) =&gt; println!("Error: {}", e),
+    }
+    
+    println!("\n=== Complex Calculation ===");
+    match complex_calculation(16.0, 4.0) {
+        Ok(result) =&gt; println!("√(16/4) = {}", result),
+        Err(e) =&gt; println!("Error: {}", e),
+    }
+    
+    match complex_calculation(16.0, 0.0) {
+        Ok(result) =&gt; println!("Result: {}", result),
+        Err(e) =&gt; println!("Error: {}", e),
+    }
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>Custom Enums</strong>: Define domain-specific errors</li>
+            <li><strong>Display Trait</strong>: Implement for user-friendly messages</li>
+            <li><strong>Type Safety</strong>: Different error types for different contexts</li>
+            <li><strong>Composability</strong>: Use ? with custom errors</li>
+        </ul>
+
+        <h3>Output</h3>
+        <pre><code class="language-">
+=== Safe Math Operations ===
+
+10 / 2 = 5
+Error: Cannot divide by zero
+√16 = 4
+Error: Cannot take square root of negative number
+
+=== Complex Calculation ===
+√(16/4) = 2
+Error: Cannot divide by zero
+</code></pre>
+
+        <hr>
+
+        <h2>Program 4: Combining Option and Result</h2>
+
+        <p>Real programs often use both Option and Result together.</p>
+
+        <pre><code class="language-rust">
+fn find_user(id: u32) -&gt; Option&lt;String&gt; {
+    match id {
+        1 =&gt; Some(String::from("Alice")),
+        2 =&gt; Some(String::from("Bob")),
+        _ =&gt; None,
+    }
+}
+
+fn get_user_age(name: &amp;str) -&gt; Result&lt;u32, String&gt; {
+    match name {
+        "Alice" =&gt; Ok(25),
+        "Bob" =&gt; Ok(30),
+        _ =&gt; Err(String::from("User not found in age database")),
+    }
+}
+
+fn get_user_info(id: u32) -&gt; Result&lt;(String, u32), String&gt; {
+    let name = find_user(id)
+        .ok_or(String::from("User ID not found"))?;
+    
+    let age = get_user_age(&amp;name)?;
+    
+    Ok((name, age))
+}
+
+fn main() {
+    println!("=== User Lookup System ===\n");
+    
+    match get_user_info(1) {
+        Ok((name, age)) =&gt; println!("User 1: {} (age {})", name, age),
+        Err(e) =&gt; println!("Error: {}", e),
+    }
+    
+    match get_user_info(2) {
+        Ok((name, age)) =&gt; println!("User 2: {} (age {})", name, age),
+        Err(e) =&gt; println!("Error: {}", e),
+    }
+    
+    match get_user_info(99) {
+        Ok((name, age)) =&gt; println!("User: {} (age {})", name, age),
+        Err(e) =&gt; println!("Error: {}", e),
+    }
+    
+    // Using unwrap_or for defaults
+    let user = find_user(5).unwrap_or(String::from("Guest"));
+    println!("\nUser 5 or default: {}", user);
+    
+    // Using and_then for chaining Options
+    let result = find_user(1)
+        .and_then(|name| Some(name.to_uppercase()));
+    println!("Uppercase name: {:?}", result);
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>ok_or()</strong>: Converts Option to Result</li>
+            <li><strong>Chaining</strong>: Combine multiple fallible operations</li>
+            <li><strong>unwrap_or()</strong>: Provide default values</li>
+            <li><strong>and_then()</strong>: Chain operations on Option/Result</li>
+        </ul>
+
+        <h3>Output</h3>
+        <pre><code class="language-">
+=== User Lookup System ===
+
+User 1: Alice (age 25)
+User 2: Bob (age 30)
+Error: User ID not found
+
+User 5 or default: Guest
+Uppercase name: Some("ALICE")
+</code></pre>
+
+        <hr>
+
+        <h2>Program 5: Best Practices - A Complete Example</h2>
+
+        <p>Let's build a configuration file parser demonstrating best practices.</p>
+
+        <pre><code class="language-rust">
+use std::collections::HashMap;
+
+#[derive(Debug)]
+enum ConfigError {
+    MissingField(String),
+    InvalidValue(String),
+    ParseError(String),
+}
+
+impl std::fmt::Display for ConfigError {
+    fn fmt(&amp;self, f: &amp;mut std::fmt::Formatter) -&gt; std::fmt::Result {
+        match self {
+            ConfigError::MissingField(field) =&gt; write!(f, "Missing required field: {}", field),
+            ConfigError::InvalidValue(msg) =&gt; write!(f, "Invalid value: {}", msg),
+            ConfigError::ParseError(msg) =&gt; write!(f, "Parse error: {}", msg),
+        }
+    }
+}
+
+struct Config {
+    host: String,
+    port: u16,
+    debug: bool,
+}
+
+impl Config {
+    fn new(host: String, port: u16, debug: bool) -&gt; Config {
+        Config { host, port, debug }
+    }
+    
+    fn from_map(map: &amp;HashMap&lt;String, String&gt;) -&gt; Result&lt;Config, ConfigError&gt; {
+        let host = map.get("host")
+            .ok_or(ConfigError::MissingField(String::from("host")))?
+            .clone();
+        
+        let port_str = map.get("port")
+            .ok_or(ConfigError::MissingField(String::from("port")))?;
+        
+        let port = port_str.parse::&lt;u16&gt;()
+            .map_err(|_| ConfigError::ParseError(format!("Invalid port: {}", port_str)))?;
+        
+        if port &lt; 1024 {
+            return Err(ConfigError::InvalidValue(
+                String::from("Port must be &gt;= 1024")
+            ));
+        }
+        
+        let debug = map.get("debug")
+            .map(|s| s == "true")
+            .unwrap_or(false);
+        
+        Ok(Config::new(host, port, debug))
+    }
+    
+    fn display(&amp;self) {
+        println!("Configuration:");
+        println!("  Host: {}", self.host);
+        println!("  Port: {}", self.port);
+        println!("  Debug: {}", self.debug);
+    }
+}
+
+fn main() {
+    println!("=== Configuration Parser ===\n");
+    
+    // Valid configuration
+    let mut config1 = HashMap::new();
+    config1.insert(String::from("host"), String::from("localhost"));
+    config1.insert(String::from("port"), String::from("8080"));
+    config1.insert(String::from("debug"), String::from("true"));
+    
+    match Config::from_map(&amp;config1) {
+        Ok(config) =&gt; config.display(),
+        Err(e) =&gt; println!("Error: {}", e),
+    }
+    
+    // Missing field
+    println!("\n--- Missing field test ---");
+    let mut config2 = HashMap::new();
+    config2.insert(String::from("host"), String::from("localhost"));
+    
+    match Config::from_map(&amp;config2) {
+        Ok(config) =&gt; config.display(),
+        Err(e) =&gt; println!("Error: {}", e),
+    }
+    
+    // Invalid port
+    println!("\n--- Invalid port test ---");
+    let mut config3 = HashMap::new();
+    config3.insert(String::from("host"), String::from("localhost"));
+    config3.insert(String::from("port"), String::from("500"));
+    
+    match Config::from_map(&amp;config3) {
+        Ok(config) =&gt; config.display(),
+        Err(e) =&gt; println!("Error: {}", e),
+    }
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>Validation</strong>: Check values before creating structs</li>
+            <li><strong>map_err()</strong>: Convert one error type to another</li>
+            <li><strong>Builder Pattern</strong>: Construct complex objects safely</li>
+            <li><strong>Descriptive Errors</strong>: Help users fix problems</li>
+            <li><strong>Defensive Programming</strong>: Validate all inputs</li>
+        </ul>
+
+        <h3>Output</h3>
+        <pre><code class="language-">
+=== Configuration Parser ===
+
+Configuration:
+  Host: localhost
+  Port: 8080
+  Debug: true
+
+--- Missing field test ---
+Error: Missing required field: port
+
+--- Invalid port test ---
+Error: Invalid value: Port must be &gt;= 1024
+</code></pre>
+
+        <hr>
+
+        <h2>Summary & Course Completion 🎓</h2>
+
+        <p>Congratulations! You've completed all 10 lessons of Rust programming. Let's review what you've learned:</p>
+
+        <h3>Course Overview</h3>
+
+        <p>1. <strong>Lesson 1</strong>: Basics - variables, functions, control flow</p>
+        <p>2. <strong>Lesson 2</strong>: Integer arithmetic operations</p>
+        <p>3. <strong>Lesson 3</strong>: Floating-point numbers and type conversion</p>
+        <p>4. <strong>Lesson 4</strong>: Control flow with if, else, and loops</p>
+        <p>5. <strong>Lesson 5</strong>: Advanced loops, arrays, tuples, and match</p>
+        <p>6. <strong>Lesson 6</strong>: Ownership, borrowing, and references</p>
+        <p>7. <strong>Lesson 7</strong>: Structs and methods</p>
+        <p>8. <strong>Lesson 8</strong>: Enums and pattern matching</p>
+        <p>9. <strong>Lesson 9</strong>: Collections (Vec, String, HashMap)</p>
+        <p>10. <strong>Lesson 10</strong>: Error handling and best practices</p>
+
+        <h3>Error Handling Guidelines</h3>
+
+        <ul>
+            <li><strong>Use Result<T, E></strong> for recoverable errors</li>
+            <li><strong>Use Option<T></strong> for optional values</li>
+            <li><strong>Use panic!</strong> only for unrecoverable errors</li>
+            <li><strong>Use ?</strong> operator for clean error propagation</li>
+            <li><strong>Create custom error types</strong> for domain-specific errors</li>
+            <li><strong>Validate inputs</strong> and provide helpful error messages</li>
+        </ul>
+
+        <h3>Rust Best Practices</h3>
+
+        <p>1. <strong>Prefer immutability</strong>: Use <code>let</code> by default, <code>mut</code> only when needed
+        </p>
+        <p>2. <strong>Use the type system</strong>: Let the compiler catch bugs</p>
+        <p>3. <strong>Handle all cases</strong>: Use <code>match</code> exhaustively</p>
+        <p>4. <strong>Avoid unwrap()</strong>: Use <code>?</code>, <code>unwrap_or()</code>, or proper error handling
+        </p>
+        <p>5. <strong>Write tests</strong>: Rust has built-in testing support</p>
+        <p>6. <strong>Use clippy</strong>: Rust's linter for best practices</p>
+        <p>7. <strong>Read compiler messages</strong>: They're incredibly helpful!</p>
+
+        <h3>What's Next?</h3>
+
+        <p>You now have a solid foundation in Rust! Here are suggested next steps:</p>
+
+        <p>1. <strong>Build Projects</strong>: Create CLI tools, web servers, or games</p>
+        <p>2. <strong>Learn Advanced Topics</strong>: Lifetimes, traits, generics, async/await</p>
+        <p>3. <strong>Read The Book</strong>: "The Rust Programming Language" (official docs)</p>
+        <p>4. <strong>Explore Crates</strong>: Use crates.io to find libraries</p>
+        <p>5. <strong>Join the Community</strong>: Rust forums, Discord, Reddit</p>
+        <p>6. <strong>Contribute</strong>: Open source Rust projects welcome beginners</p>
+
+        <h3>Final Challenge 🚀</h3>
+
+        <p>Build a complete application combining everything you've learned:</p>
+
+        <p><strong>Project: Task Manager CLI</strong></p>
+        <ul>
+            <li>Use structs for Task (id, description, completed)</li>
+            <li>Use Vec to store tasks</li>
+            <li>Use HashMap for categories</li>
+            <li>Use Result for error handling</li>
+            <li>Implement add, remove, list, and complete commands</li>
+            <li>Save/load tasks from a file</li>
+        </ul>
+
+        <h3>Thank You!</h3>
+
+        <p>You've worked through 10 comprehensive lessons covering Rust fundamentals. The journey from "Hello, World!"
+            to error handling and best practices is significant. Keep practicing, keep building, and most importantly,
+            keep having fun with Rust!</p>
+
+        <p><strong>Happy Coding, Rustacean! 🦀</strong></p>
+
+        <hr>
+
+        <p><em>"Rust empowers everyone to build reliable and efficient software."</em></p>
+
+    </div>
+    <div class="lesson-divider">• • •</div>
+    <div id="lesson-3">
+        <h1>Rust Programming Lesson 2: Arithmetic Operations with Integers</h1>
+
+        <p>Welcome to Lesson 2! In this lesson, we'll explore the fundamental arithmetic operations in Rust: addition,
+            subtraction, multiplication, and division. These are the building blocks of mathematical computation in
+            programming.</p>
+
+        <p>Rust provides powerful type safety for numeric operations, helping you avoid common bugs. Let's dive into
+            five programs that demonstrate these concepts clearly.</p>
+
+        <hr>
+
+        <h2>Program 1: Adding Two Integers ➕</h2>
+
+        <p>This program demonstrates the simplest arithmetic operation: addition. We'll add two integers and display the
+            result.</p>
+
+        <pre><code class="language-rust">
+fn main() {
+    let num1 = 15;
+    let num2 = 27;
+    let sum = num1 + num2;
+    
+    println!("{} + {} = {}", num1, num2, sum);
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <p>1. <strong>Integer Type Inference</strong>: When you write <code>let num1 = 15;</code> without a decimal
+            point, Rust infers the type as <code>i32</code> (a 32-bit signed integer). This is Rust's default integer
+            type.</p>
+        <p>2. <strong>The <code>+</code> Operator</strong>: The addition operator works exactly as you'd expect. It
+            takes two values of the same numeric type and produces their sum.</p>
+        <p>3. <strong>Variable Immutability</strong>: All three variables (<code>num1</code>, <code>num2</code>, and
+            <code>sum</code>) are immutable by default. Once assigned, their values cannot change.
+        </p>
+        <p>4. <strong>String Formatting</strong>: The <code>println!</code> macro uses <code>{}</code> placeholders to
+            insert values into the output string in order.</p>
+
+        <h3>Output</h3>
+        <pre><code class="language-">
+15 + 27 = 42
+</code></pre>
+
+        <hr>
+
+        <h2>Program 2: Subtracting Two Integers ➖</h2>
+
+        <p>This program shows subtraction and introduces the concept of negative results.</p>
+
+        <pre><code class="language-rust">
+fn main() {
+    let num1 = 50;
+    let num2 = 23;
+    let difference = num1 - num2;
+    
+    println!("{} - {} = {}", num1, num2, difference);
+    
+    // Demonstrating negative results
+    let num3 = 10;
+    let num4 = 25;
+    let negative_result = num3 - num4;
+    
+    println!("{} - {} = {}", num3, num4, negative_result);
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <p>1. <strong>The <code>-</code> Operator</strong>: Subtracts the second operand from the first.</p>
+        <p>2. <strong>Signed Integers</strong>: The <code>i32</code> type can hold both positive and negative numbers.
+            The range is approximately -2.1 billion to +2.1 billion.</p>
+        <p>3. <strong>Comments</strong>: Lines starting with <code>//</code> are comments. They're ignored by the
+            compiler and help explain your code to humans.</p>
+        <p>4. <strong>Multiple Operations</strong>: You can perform multiple calculations in the same program. Each
+            operation is independent.</p>
+
+        <h3>Output</h3>
+        <pre><code class="language-">
+50 - 23 = 27
+10 - 25 = -15
+</code></pre>
+
+        <hr>
+
+        <h2>Program 3: Multiplying Two Integers ✖️</h2>
+
+        <p>This program demonstrates multiplication and shows how quickly numbers can grow.</p>
+
+        <pre><code class="language-rust">
+fn main() {
+    let num1 = 12;
+    let num2 = 8;
+    let product = num1 * num2;
+    
+    println!("{} × {} = {}", num1, num2, product);
+    
+    // Multiplying by zero
+    let num3 = 42;
+    let num4 = 0;
+    let zero_product = num3 * num4;
+    
+    println!("{} × {} = {}", num3, num4, zero_product);
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <p>1. *<em>The <code></em></code> Operator*<em>: The asterisk performs multiplication. Note that we use
+                    <code></em></code> in code, but can display <code>×</code> in output using Unicode characters.</p>
+        <p>2. <strong>Multiplication by Zero</strong>: Any number multiplied by zero equals zero. This is a fundamental
+            mathematical property.</p>
+        <p>3. <strong>Integer Overflow</strong>: Be careful! If the result exceeds the maximum value for
+            <code>i32</code> (about 2.1 billion), Rust will panic in debug mode or wrap around in release mode. For
+            larger numbers, use <code>i64</code> or <code>i128</code>.
+        </p>
+
+        <h3>Output</h3>
+        <pre><code class="language-">
+12 × 8 = 96
+42 × 0 = 0
+</code></pre>
+
+        <hr>
+
+        <h2>Program 4: Dividing Two Integers ➗</h2>
+
+        <p>This program shows integer division and introduces an important concept: integer division truncates (drops)
+            the decimal part.</p>
+
+        <pre><code class="language-rust">
+fn main() {
+    let num1 = 20;
+    let num2 = 4;
+    let quotient = num1 / num2;
+    
+    println!("{} ÷ {} = {}", num1, num2, quotient);
+    
+    // Integer division truncates
+    let num3 = 17;
+    let num4 = 5;
+    let truncated_quotient = num3 / num4;
+    
+    println!("{} ÷ {} = {} (truncated)", num3, num4, truncated_quotient);
+    
+    // Getting the remainder with modulo
+    let remainder = num3 % num4;
+    println!("{} ÷ {} has remainder {}", num3, num4, remainder);
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <p>1. <strong>The <code>/</code> Operator</strong>: Performs division. When both operands are integers, this is
+            <strong>integer division</strong>.
+        </p>
+        <p>2. <strong>Integer Division Truncates</strong>: <code>17 / 5</code> equals <code>3</code>, not
+            <code>3.4</code>. The decimal part is discarded (not rounded).
+        </p>
+        <p>3. <strong>The <code>%</code> Operator (Modulo)</strong>: Returns the remainder after division.
+            <code>17 % 5</code> equals <code>2</code> because 17 = (5 × 3) + 2.
+        </p>
+        <p>4. <strong>Division by Zero</strong>: Attempting to divide by zero will cause your program to panic (crash).
+            Always validate your divisor is not zero in real applications.</p>
+
+        <h3>Output</h3>
+        <pre><code class="language-">
+20 ÷ 4 = 5
+17 ÷ 5 = 3 (truncated)
+17 ÷ 5 has remainder 2
+</code></pre>
+
+        <hr>
+
+        <h2>Program 5: Calculator - All Operations Combined 🧮</h2>
+
+        <p>This program creates a simple calculator function that performs all four basic operations on two integers.
+        </p>
+
+        <pre><code class="language-rust">
+fn add(a: i32, b: i32) -&gt; i32 {
+    a + b
+}
+
+fn subtract(a: i32, b: i32) -&gt; i32 {
+    a - b
+}
+
+fn multiply(a: i32, b: i32) -&gt; i32 {
+    a * b
+}
+
+fn divide(a: i32, b: i32) -&gt; i32 {
+    if b == 0 {
+        println!("Error: Cannot divide by zero!");
+        return 0;
+    }
+    a / b
+}
+
+fn main() {
+    let x = 24;
+    let y = 6;
+    
+    println!("Calculator for {} and {}", x, y);
+    println!("─────────────────────────");
+    println!("Addition:       {} + {} = {}", x, y, add(x, y));
+    println!("Subtraction:    {} - {} = {}", x, y, subtract(x, y));
+    println!("Multiplication: {} × {} = {}", x, y, multiply(x, y));
+    println!("Division:       {} ÷ {} = {}", x, y, divide(x, y));
+    
+    // Test division by zero protection
+    println!("\nTesting division by zero:");
+    let result = divide(10, 0);
+    println!("Result: {}", result);
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <p>1. <strong>Function Parameters</strong>: Each function takes two parameters of type <code>i32</code> and
+            returns an <code>i32</code>.</p>
+        <ul>
+            <li><code>fn add(a: i32, b: i32) -> i32</code>: This signature tells us the function takes two 32-bit
+                integers and returns one.</li>
+        </ul>
+
+        <h3>Output</h3>
+        <pre><code class="language-">
+Calculator for 24 and 6
+─────────────────────────
+Addition:       24 + 6 = 30
+Subtraction:    24 - 6 = 18
+Multiplication: 24 × 6 = 144
+Division:       24 ÷ 6 = 4
+
+Testing division by zero:
+Error: Cannot divide by zero!
+Result: 0
+</code></pre>
+
+        <hr>
+
+        <h2>Summary & Key Takeaways</h2>
+
+        <p>You've now mastered the four basic arithmetic operations in Rust:</p>
+        <ul>
+            <li><strong>Addition (<code>+</code>)</strong>: Combines two numbers into their sum.</li>
+            <li><strong>Subtraction (<code>-</code>)</strong>: Finds the difference between two numbers.</li>
+            <li>*<em>Multiplication (<code></em></code>)**: Calculates the product of two numbers.</li>
+            <li><strong>Division (<code>/</code>)</strong>: Divides one number by another (integer division truncates).
+            </li>
+            <li><strong>Modulo (<code>%</code>)</strong>: Finds the remainder after division.</li>
+        </ul>
+
+        <h3>Important Points to Remember</h3>
+
+        <p>1. <strong>Integer vs. Float</strong>: When both operands are integers, you get integer division. For decimal
+            results, use floating-point types (<code>f32</code> or <code>f64</code>).</p>
+        <p>2. <strong>Type Safety</strong>: Rust won't let you mix types without explicit conversion. You can't add an
+            <code>i32</code> to an <code>f64</code> without converting one of them.
+        </p>
+        <p>3. <strong>Overflow</strong>: Be aware of the limits of your integer types. Use larger types
+            (<code>i64</code>, <code>i128</code>) for bigger numbers.</p>
+        <p>4. <strong>Division by Zero</strong>: Always check for zero before dividing to prevent panics.</p>
+
+        <h3>Try It Yourself! 🚀</h3>
+
+        <p>1. <strong>Modify Program 1</strong>: Change the numbers to see different sums. Try very large numbers and
+            observe what happens.</p>
+        <p>2. <strong>Modify Program 4</strong>: Convert the integer division to floating-point division by using
+            <code>17.0 / 5.0</code> instead.
+        </p>
+        <p>3. <strong>Extend Program 5</strong>: Add a <code>modulo</code> function that returns the remainder, and add
+            it to the calculator output.</p>
+        <p>4. <strong>Challenge</strong>: Create a program that calculates the average of three integers. Remember that
+            integer division truncates!</p>
+
+        <h3>Next Steps</h3>
+
+        <p>In the next lesson, we'll explore:</p>
+        <ul>
+            <li>Working with floating-point numbers for precise decimal calculations</li>
+            <li>Type conversion between different numeric types</li>
+            <li>More complex mathematical operations</li>
+        </ul>
+
+        <p>Happy Coding! 🦀</p>
+
+    </div>
+    <div class="lesson-divider">• • •</div>
+    <div id="lesson-4">
+        <h1>Rust Programming Lesson 3: Floating-Point Numbers and Type Conversion</h1>
+
+        <p>Welcome to Lesson 3! Now that you've mastered basic arithmetic with integers, let's explore floating-point
+            numbers and type conversion in Rust. These concepts will expand your mathematical capabilities and help you
+            work with more precise calculations.</p>
+
+        <h2>Program 1: Integer vs. Floating-Point Division</h2>
+
+        <p>This program demonstrates the difference between integer division (which truncates) and floating-point
+            division (which preserves decimal values).</p>
+
+        <pre><code class="language-rust">
+fn main() {
+    // Integer division (truncates)
+    let int_a = 17;
+    let int_b = 5;
+    let int_result = int_a / int_b;
+    
+    // Floating-point division (preserves decimals)
+    let float_a = 17.0;
+    let float_b = 5.0;
+    let float_result = float_a / float_b;
+    
+    println!("Integer division: {} ÷ {} = {}", int_a, int_b, int_result);
+    println!("Floating-point division: {} ÷ {} = {}", float_a, float_b, float_result);
+    
+    // Using f64 for more precision
+    let precise_a: f64 = 17.0;
+    let precise_b: f64 = 5.0;
+    let precise_result = precise_a / precise_b;
+    
+    println!("Precise f64 division: {} ÷ {} = {}", precise_a, precise_b, precise_result);
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>Floating-Point Types</strong>: Rust has two floating-point types: <code>f32</code> (32-bit) and
+                <code>f64</code> (64-bit). <code>f64</code> is the default and provides more precision.
+            </li>
+            <li><strong>Type Annotations</strong>: We can explicitly specify types using <code>: f64</code> syntax.</li>
+            <li><strong>Integer vs. Floating-Point Division</strong>: Integer division truncates the decimal part, while
+                floating-point division preserves it.</li>
+            <li><strong>Default Types</strong>: When you write a number with a decimal point (like <code>17.0</code>),
+                Rust infers it as <code>f64</code> by default.</li>
+        </ul>
+
+        <h3>Output</h3>
+
+        <pre><code class="language-">
+Integer division: 17 ÷ 5 = 3
+Floating-point division: 17 ÷ 5 = 3.4
+Precise f64 division: 17 ÷ 5 = 3.4
+</code></pre>
+
+        <hr>
+
+        <h2>Program 2: Type Conversion</h2>
+
+        <p>This program demonstrates how to convert between different numeric types in Rust.</p>
+
+        <pre><code class="language-rust">
+fn main() {
+    let integer = 5;
+    let float = 2.5;
+    
+    // This would cause an error:
+    // let result = integer + float;
+    
+    // Correct way: convert integer to float
+    let result = integer as f64 + float;
+    println!("{} + {} = {}", integer, float, result);
+    
+    // Converting float to integer (truncates)
+    let float_value = 3.7;
+    let int_value = float_value as i32;
+    println!("{} converted to integer is {}", float_value, int_value);
+    
+    // Converting between integer types
+    let small_int: i16 = 100;
+    let large_int: i64 = small_int as i64;
+    println!("{} converted from i16 to i64 is {}", small_int, large_int);
+    
+    // Converting with potential data loss
+    let big_int: i32 = 300;
+    let small_int: i8 = big_int as i8; // i8 can only hold -128 to 127
+    println!("{} converted to i8 is {} (data loss occurred)", big_int, small_int);
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>Type Casting</strong>: Use the <code>as</code> keyword to convert between types.</li>
+            <li><strong>Data Loss</strong>: Be careful when converting to smaller types, as data may be lost.</li>
+            <li><strong>Implicit vs. Explicit Conversion</strong>: Rust requires explicit conversion between numeric
+                types.</li>
+            <li><strong>Truncation in Float to Int Conversion</strong>: When converting a float to an integer, the
+                decimal part is truncated.</li>
+        </ul>
+
+        <h3>Output</h3>
+
+        <pre><code class="language-">
+5 + 2.5 = 7.5
+3.7 converted to integer is 3
+100 converted from i16 to i64 is 100
+300 converted to i8 is 44 (data loss occurred)
+</code></pre>
+
+        <hr>
+
+        <h2>Program 3: Mathematical Functions</h2>
+
+        <p>This program introduces some useful mathematical functions from Rust's standard library.</p>
+
+        <pre><code class="language-rust">
+use std::f64::consts::PI;
+
+fn main() {
+    let radius = 5.0;
+    
+    // Calculating circle area
+    let area = PI * radius * radius;
+    println!("Circle with radius {} has area {:.2}", radius, area);
+    
+    // Square root
+    let number = 25.0;
+    let sqrt_result = number.sqrt();
+    println!("Square root of {} is {}", number, sqrt_result);
+    
+    // Rounding
+    let float_value = 3.7;
+    println!("Rounding up {}: {}", float_value, float_value.ceil());
+    println!("Rounding down {}: {}", float_value, float_value.floor());
+    println!("Rounding {}: {}", float_value, float_value.round());
+    
+    // Power and absolute value
+    let base = 2.0;
+    let exponent = 3.0;
+    let power_result = base.powf(exponent);
+    println!("{} to the power of {} is {}", base, exponent, power_result);
+    
+    let negative_value = -4.5;
+    println!("Absolute value of {} is {}", negative_value, negative_value.abs());
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>Importing Constants</strong>: Use <code>use std::f64::consts::PI</code> to import mathematical
+                constants.</li>
+            <li><strong>String Formatting</strong>: <code>{:.2}</code> formats a float to 2 decimal places.</li>
+            <li><strong>Mathematical Methods</strong>: Rust's floating-point types have methods like
+                <code>sqrt()</code>, <code>ceil()</code>, <code>floor()</code>, <code>round()</code>,
+                <code>powf()</code>, and <code>abs()</code>.
+            </li>
+            <li><strong>Floating-Point Methods</strong>: These methods are available on both <code>f32</code> and
+                <code>f64</code> types.
+            </li>
+        </ul>
+
+        <h3>Output</h3>
+
+        <pre><code class="language-">
+Circle with radius 5 has area 78.54
+Square root of 25 is 5
+Rounding up 3.7: 4
+Rounding down 3.7: 3
+Rounding 3.7: 4
+2 to the power of 3 is 8
+Absolute value of -4.5 is 4.5
+</code></pre>
+
+        <hr>
+
+        <h2>Program 4: Constants and Shadowing</h2>
+
+        <p>This program demonstrates constants and variable shadowing in Rust.</p>
+
+        <pre><code class="language-rust">
+const SECONDS_IN_MINUTE: u32 = 60;
+const MINUTES_IN_HOUR: u32 = 60;
+
+fn main() {
+    // Using constants
+    let hours = 2;
+    let seconds = hours * MINUTES_IN_HOUR * SECONDS_IN_MINUTE;
+    println!("{} hours = {} seconds", hours, seconds);
+    
+    // Variable shadowing
+    let x = 5;
+    println!("Initial value of x: {}", x);
+    
+    let x = x + 1;
+    println!("After shadowing: {}", x);
+    
+    let x = x * 2;
+    println!("After second shadowing: {}", x);
+    
+    // Shadowing with different types
+    let spaces = "   ";
+    println!("spaces as string: '{}'", spaces);
+    
+    let spaces = spaces.len();
+    println!("spaces as number: {}", spaces);
+    
+    // Constants vs. immutable variables
+    const MAX_POINTS: u32 = 100_000;
+    let mut current_points = 50_000;
+    
+    println!("Current points: {}/{}", current_points, MAX_POINTS);
+    
+    // This would cause an error:
+    // MAX_POINTS = 200_000;
+    
+    // But this is fine:
+    current_points = 75_000;
+    println!("Updated points: {}/{}", current_points, MAX_POINTS);
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>Constants</strong>: Defined with <code>const</code> and must have an explicit type. Constants
+                can't be changed.</li>
+            <li><strong>Shadowing</strong>: Declaring a new variable with the same name as a previous one. The new
+                variable "shadows" the old one.</li>
+            <li><strong>Shadowing with Different Types</strong>: You can shadow a variable with a different type, which
+                isn't possible with <code>mut</code>.</li>
+            <li><strong>Naming Conventions</strong>: Constants are typically named in <code>SCREAMING_SNAKE_CASE</code>.
+            </li>
+            <li><strong>Numeric Literals</strong>: Underscores can be used in numeric literals for readability (e.g.,
+                <code>100_000</code>).
+            </li>
+        </ul>
+
+        <h3>Output</h3>
+
+        <pre><code class="language-">
+2 hours = 7200 seconds
+Initial value of x: 5
+After shadowing: 6
+After second shadowing: 12
+spaces as string: '   '
+spaces as number: 3
+Current points: 50000/100000
+Updated points: 75000/100000
+</code></pre>
+
+        <hr>
+
+        <h2>Program 5: Interactive Calculator</h2>
+
+        <p>This program creates an interactive calculator that takes user input and performs calculations.</p>
+
+        <pre><code class="language-rust">
+use std::io;
+
+fn main() {
+    println!("Simple Calculator");
+    println!("-----------------");
+    
+    // Get first number
+    println!("Enter first number:");
+    let mut num1_str = String::new();
+    io::stdin().read_line(&amp;mut num1_str)
+        .expect("Failed to read line");
+    
+    let num1: f64 = match num1_str.trim().parse() {
+        Ok(num) =&gt; num,
+        Err(_) =&gt; {
+            println!("Please enter a valid number!");
+            return;
+        }
+    };
+    
+    // Get operation
+    println!("Enter operation (+, -, *, /):");
+    let mut operation = String::new();
+    io::stdin().read_line(&amp;mut operation)
+        .expect("Failed to read line");
+    
+    // Get second number
+    println!("Enter second number:");
+    let mut num2_str = String::new();
+    io::stdin().read_line(&amp;mut num2_str)
+        .expect("Failed to read line");
+    
+    let num2: f64 = match num2_str.trim().parse() {
+        Ok(num) =&gt; num,
+        Err(_) =&gt; {
+            println!("Please enter a valid number!");
+            return;
+        }
+    };
+    
+    // Perform calculation
+    let result = match operation.trim() {
+        "+" =&gt; num1 + num2,
+        "-" =&gt; num1 - num2,
+        "*" =&gt; num1 * num2,
+        "/" =&gt; {
+            if num2 == 0.0 {
+                println!("Error: Division by zero!");
+                return;
+            }
+            num1 / num2
+        },
+        _ =&gt; {
+            println!("Invalid operation!");
+            return;
+        }
+    };
+    
+    println!("Result: {:.2}", result);
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>Standard Library Input</strong>: Using <code>std::io</code> to read user input.</li>
+            <li><strong>String Parsing</strong>: Converting strings to numbers using <code>parse()</code>.</li>
+            <li><strong>Error Handling with match</strong>: Handling potential parsing errors gracefully.</li>
+            <li><strong>String Methods</strong>: Using <code>trim()</code> to remove whitespace.</li>
+            <li><strong>Pattern Matching</strong>: Using <code>match</code> to determine which operation to perform.
+            </li>
+            <li><strong>Early Returns</strong>: Using <code>return</code> to exit the function early when errors occur.
+            </li>
+        </ul>
+
+        <h3>Output (Example Interaction)</h3>
+
+        <pre><code class="language-">
+Simple Calculator
+-----------------
+Enter first number:
+10.5
+Enter operation (+, -, *, /):
+*
+Enter second number:
+2
+Result: 21.00
+</code></pre>
+
+        <hr>
+
+        <h2>Summary & Key Takeaways</h2>
+
+        <p>You've now learned about floating-point numbers and type conversion in Rust:</p>
+
+        <ul>
+            <li><strong>Floating-Point Types</strong>: <code>f32</code> and <code>f64</code> for decimal calculations,
+                with <code>f64</code> being the default.</li>
+            <li><strong>Type Conversion</strong>: Using the <code>as</code> keyword to explicitly convert between types.
+            </li>
+            <li><strong>Mathematical Functions</strong>: Using methods like <code>sqrt()</code>, <code>ceil()</code>,
+                <code>floor()</code>, etc.
+            </li>
+            <li><strong>Constants</strong>: Defining unchangeable values with <code>const</code>.</li>
+            <li><strong>Shadowing</strong>: Reusing variable names with different values or types.</li>
+            <li><strong>User Input</strong>: Reading and parsing user input for interactive programs.</li>
+        </ul>
+
+        <h3>Important Points to Remember</h3>
+
+        <ul>
+            <li><strong>Precision</strong>: <code>f64</code> provides more precision than <code>f32</code> but uses more
+                memory.</li>
+            <li><strong>Type Safety</strong>: Rust requires explicit conversion between types to prevent bugs.</li>
+            <li><strong>Data Loss</strong>: Be careful when converting to smaller types, as data may be lost.</li>
+            <li><strong>Constants vs. Variables</strong>: Constants are always immutable and must have a type
+                annotation.</li>
+            <li><strong>Error Handling</strong>: Always handle potential errors when parsing user input.</li>
+        </ul>
+
+        <h3>Try It Yourself! 🚀</h3>
+
+        <p>1. <strong>Modify Program 1</strong>: Create a program that calculates the area and circumference of a circle
+            with a user-provided radius.</p>
+        <p>2. <strong>Extend Program 3</strong>: Add more mathematical operations like trigonometric functions (sin,
+            cos, tan).</p>
+        <p>3. <strong>Enhance Program 5</strong>: Add support for more operations like exponentiation (^) and modulo
+            (%).</p>
+        <p>4. <strong>Challenge</strong>: Create a temperature converter that converts between Celsius, Fahrenheit, and
+            Kelvin.</p>
+
+        <h2>Next Steps</h2>
+
+        <p>In the next lesson, we'll explore:</p>
+
+        <ul>
+            <li>Control flow with <code>if</code>, <code>else if</code>, and <code>else</code></li>
+            <li>Loops with <code>loop</code>, <code>while</code>, and <code>for</code></li>
+            <li>Pattern matching with <code>match</code></li>
+            <li>Handling complex conditional logic</li>
+        </ul>
+
+        <p><strong>Happy Coding! 🦀</strong></p>
+
+    </div>
+    <div class="lesson-divider">• • •</div>
+    <div id="lesson-5">
+        <h1>Rust Programming Lesson 4: Control Flow with if, else, and Loops</h1>
+
+        <p>Welcome to Lesson 4! So far, our programs have executed sequentially, line by line, from top to bottom. Now,
+            it's time to make our programs smarter by introducing control flow. Control flow allows you to execute code
+            conditionally and repeat blocks of code, making your programs dynamic and responsive.</p>
+
+        <h2>Program 1: Making Decisions with if</h2>
+
+        <p>This program introduces the most fundamental form of control flow: the if statement. It runs a block of code
+            only if a specified condition is true.</p>
+
+        <pre><code class="language-rust">
+fn main() {
+    let number = 10;
+
+    if number &gt; 5 {
+        println!("The condition was true!");
+        println!("{} is greater than 5.", number);
+    }
+
+    let another_number = 3;
+    if another_number &gt; 5 {
+        // This block will not run
+        println!("You won't see this.");
+    }
+
+    println!("Program finished.");
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>if Statement</strong>: The <code>if</code> keyword is followed by a condition. If the condition
+                evaluates to <code>true</code>, the code inside the subsequent curly braces <code>{}</code> is executed.
+            </li>
+            <li><strong>Conditions</strong>: A condition is an expression that evaluates to a boolean value
+                (<code>true</code> or <code>false</code>). Common comparison operators include:</li>
+            <li><code>></code> greater than</li>
+            <li><code><</code> less than</li>
+            <li><code>==</code> equal to</li>
+            <li><code>!=</code> not equal to</li>
+            <li><strong>Code Blocks</strong>: The code inside the curly braces <code>{...}</code> is the "body" of the
+                <code>if</code> statement. It only runs when the condition is met.
+            </li>
+            <li><strong>Immutability</strong>: The <code>if</code> statement does not change the value of the variable;
+                it only checks it.</li>
+        </ul>
+
+        <h3>Output</h3>
+
+        <pre><code class="language-">
+The condition was true!
+10 is greater than 5.
+Program finished.
+</code></pre>
+
+        <hr>
+
+        <h2>Program 2: Providing Alternatives with else</h2>
+
+        <p>What if you want to do something when the condition is false? The <code>else</code> keyword provides an
+            alternative block of code to execute.</p>
+
+        <pre><code class="language-rust">
+fn main() {
+    let age = 16;
+
+    if age &gt;= 18 {
+        println!("You are old enough to vote!");
+    } else {
+        println!("Sorry, you are not old enough to vote yet.");
+    }
+    
+    let temperature = 30;
+    
+    if temperature &gt; 25 {
+        println!("It's a hot day!");
+    } else {
+        println!("It's not a hot day.");
+    }
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>else Statement</strong>: The <code>else</code> block is executed if the preceding
+                <code>if</code> condition is <code>false</code>.
+            </li>
+            <li><strong>Mutually Exclusive</strong>: The <code>if</code> block and the <code>else</code> block are
+                mutually exclusive. Exactly one of them will run, never both.</li>
+            <li><strong>Two-Way Branch</strong>: An if-else statement creates a two-way branch in your program's logic.
+            </li>
+        </ul>
+
+        <h3>Output</h3>
+
+        <pre><code class="language-">
+Sorry, you are not old enough to vote yet.
+It's a hot day!
+</code></pre>
+
+        <hr>
+
+        <h2>Program 3: Handling Multiple Conditions with else if</h2>
+
+        <p>When you have more than two possible outcomes, you can chain <code>else if</code> statements to check
+            multiple conditions in sequence.</p>
+
+        <pre><code class="language-rust">
+fn main() {
+    let score = 85;
+    let mut grade = 'F';
+
+    if score &gt;= 90 {
+        grade = 'A';
+    } else if score &gt;= 80 {
+        grade = 'B';
+    } else if score &gt;= 70 {
+        grade = 'C';
+    } else if score &gt;= 60 {
+        grade = 'D';
+    } else {
+        // This is the final catch-all
+        grade = 'F';
+    }
+
+    println!("With a score of {}, your grade is {}.", score, grade);
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>else if Chain</strong>: You can have as many <code>else if</code> conditions as you need after
+                an initial <code>if</code>. Rust checks them in order from top to bottom.</li>
+            <li><strong>First True Condition Wins</strong>: As soon as Rust finds a condition that is <code>true</code>,
+                it executes that block and skips the rest of the <code>else if</code> and <code>else</code> chain.</li>
+            <li><strong>Final else</strong>: The final <code>else</code> block is optional but good practice. It acts as
+                a "catch-all" if none of the preceding conditions are met.</li>
+        </ul>
+
+        <h3>Output</h3>
+
+        <pre><code class="language-">
+With a score of 85, your grade is B.
+</code></pre>
+
+        <hr>
+
+        <h2>Program 4: Using if in a let Statement</h2>
+
+        <p>In Rust, <code>if</code> is an expression, meaning it evaluates to a value. This allows you to use
+            <code>if</code> statements directly on the right side of a <code>let</code> statement to assign a variable.
+        </p>
+
+        <pre><code class="language-rust">
+fn main() {
+    let condition = true;
+    let number = if condition { 5 } else { 6 };
+
+    println!("The value of number is: {}", number);
+
+    let is_logged_in = false;
+    let status_message = if is_logged_in {
+        "Welcome back!"
+    } else {
+        "Please log in to continue."
+    };
+
+    println!("Status: {}", status_message);
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>if as an Expression</strong>: Because <code>if</code> evaluates to a value, you can assign its
+                result to a variable.</li>
+            <li><strong>Type Consistency</strong>: The values returned in the <code>if</code> and <code>else</code> arms
+                must be of the same type. In the first example, both are <code>i32</code>. In the second, both are
+                <code>&str</code> (string slices). Rust will not compile your code if the types don't match.
+            </li>
+            <li><strong>No Semicolons</strong>: Notice there are no semicolons after the values (<code>5</code> and
+                <code>6</code>). This is because they are the expressions that the <code>if</code> block evaluates to.
+            </li>
+        </ul>
+
+        <h3>Output</h3>
+
+        <pre><code class="language-">
+The value of number is: 6
+Status: Please log in to continue.
+</code></pre>
+
+        <hr>
+
+        <h2>Program 5: Repeating Code with loop</h2>
+
+        <p>Sometimes, you need to repeat a block of code until a certain condition is met. The <code>loop</code> keyword
+            creates an infinite loop, which you can then exit explicitly using the <code>break</code> keyword.</p>
+
+        <pre><code class="language-rust">
+fn main() {
+    let mut counter = 0;
+
+    println!("Starting countdown...");
+    loop {
+        println!("{}", counter);
+        counter += 1;
+
+        if counter &gt; 5 {
+            // Exit the loop
+            break;
+        }
+    }
+
+    println!("Countdown finished!");
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>loop Keyword</strong>: Creates an infinite loop. The code inside its block will repeat forever
+                unless you explicitly stop it.</li>
+            <li><strong>break Keyword</strong>: Immediately exits the innermost loop it's in.</li>
+            <li><strong>Mutable Counter</strong>: We use a <code>mut</code> variable (<code>counter</code>) to keep
+                track of how many times the loop has run.</li>
+            <li><strong>Shorthand Assignment</strong>: <code>counter += 1</code> is shorthand for
+                <code>counter = counter + 1</code>.
+            </li>
+        </ul>
+
+        <h3>Output</h3>
+
+        <pre><code class="language-">
+Starting countdown...
+0
+1
+2
+3
+4
+5
+Countdown finished!
+</code></pre>
+
+        <hr>
+
+        <h2>Program 6: Combining Concepts - A Simple Number Guessing Game</h2>
+
+        <p>This program combines <code>loop</code>, <code>if</code>, <code>else if</code>, and <code>else</code> to
+            create a simple interactive game.</p>
+
+        <pre><code class="language-rust">
+use std::io;
+
+fn main() {
+    println!("Guess the number!");
+    println!("I'm thinking of a number between 1 and 10.");
+
+    let secret_number = 7;
+    let mut guess_str = String::new();
+
+    loop {
+        println!("Please input your guess.");
+
+        // Read user input
+        io::stdin()
+            .read_line(&amp;mut guess_str)
+            .expect("Failed to read line");
+
+        // Parse the string into a number
+        let guess: u32 = match guess_str.trim().parse() {
+            Ok(num) =&gt; num,
+            Err(_) =&gt; {
+                println!("Please type a number!");
+                guess_str.clear(); // Clear the string for the next iteration
+                continue; // Skip the rest of this loop iteration
+            }
+        };
+
+        // Compare the guess to the secret number
+        if guess &lt; secret_number {
+            println!("Too small!");
+        } else if guess &gt; secret_number {
+            println!("Too big!");
+        } else {
+            println!("You got it!");
+            break; // Exit the loop on a correct guess
+        }
+        
+        guess_str.clear(); // Clear the string for the next guess
+    }
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>Combining Logic</strong>: This program shows how control flow structures can be nested and
+                combined to create complex logic.</li>
+            <li><strong>continue Keyword</strong>: The <code>continue</code> keyword skips the rest of the current loop
+                iteration and starts the next one. We use it here if the user enters non-numeric input.</li>
+            <li><strong>Game Loop</strong>: The <code>loop</code> creates a "game loop" that continues until the player
+                wins.</li>
+            <li><strong>Conditional break</strong>: The <code>break</code> statement is inside an <code>if</code> block,
+                so the loop only terminates when the player's guess is correct.</li>
+        </ul>
+
+        <h3>Output (Example Interaction)</h3>
+
+        <pre><code class="language-">
+Guess the number!
+I'm thinking of a number between 1 and 10.
+Please input your guess.
+5
+Too small!
+Please input your guess.
+9
+Too big!
+Please input your guess.
+7
+You got it!
+</code></pre>
+
+        <hr>
+
+        <h2>Summary & Key Takeaways</h2>
+
+        <p>You've now learned how to control the flow of your Rust programs:</p>
+
+        <ul>
+            <li><strong>if</strong>: Executes code if a condition is true.</li>
+            <li><strong>else</strong>: Provides an alternative block of code for when the <code>if</code> condition is
+                false.</li>
+            <li><strong>else if</strong>: Chains multiple conditions together.</li>
+            <li><strong>if as an Expression</strong>: Uses <code>if</code> to assign a value to a variable, ensuring all
+                arms return the same type.</li>
+            <li><strong>loop</strong>: Creates an infinite loop.</li>
+            <li><strong>break</strong>: Exits a loop.</li>
+            <li><strong>continue</strong>: Skips the rest of the current loop iteration.</li>
+        </ul>
+
+        <h3>Important Points to Remember</h3>
+
+        <ul>
+            <li><strong>Boolean Conditions</strong>: <code>if</code> conditions must always evaluate to a boolean
+                (<code>true</code> or <code>false</code>). Rust will not automatically convert non-boolean types (like
+                numbers) to booleans.</li>
+            <li><strong>Order Matters</strong>: In an <code>else if</code> chain, the order of your conditions is
+                important.</li>
+            <li><strong>Infinite Loops</strong>: Be careful with <code>loop</code>! Always ensure there's a reachable
+                <code>break</code> condition, or your program will run forever.
+            </li>
+        </ul>
+
+        <h3>Try It Yourself! 🚀</h3>
+
+        <p>1. <strong>Modify Program 3</strong>: Add grades for A+ (score >= 97) and A- (score >= 90).</p>
+        <p>2. <strong>Even or Odd</strong>: Write a program that takes an integer and uses the modulo operator
+            (<code>%</code>) and an if-else statement to print whether the number is even or odd.</p>
+        <p>3. <strong>Extend Program 5</strong>: Modify the countdown to print "Blast off!" instead of "Countdown
+            finished!".</p>
+        <p>4. <strong>Challenge</strong>: Write a program that uses a loop and an if statement to print the numbers from
+            1 to 100, but for multiples of 3 print "Fizz" instead of the number and for multiples of 5 print "Buzz". For
+            numbers which are multiples of both 3 and 5, print "FizzBuzz".</p>
+
+        <h2>Next Steps</h2>
+
+        <p>In the next lesson, we'll explore:</p>
+
+        <ul>
+            <li>More structured loops: <code>while</code> and <code>for</code></li>
+            <li>The powerful <code>match</code> control flow operator</li>
+            <li>Tuples and Arrays for storing collections of data</li>
+        </ul>
+
+        <p><strong>Happy Coding! 🦀</strong></p>
+
+    </div>
+    <div class="lesson-divider">• • •</div>
+    <div id="lesson-6">
+        <h1>Rust Programming Lesson 5: Loops, Arrays, Tuples, and Pattern Matching</h1>
+
+        <p>Welcome to Lesson 5! You've mastered basic control flow with <code>if</code> statements and the
+            <code>loop</code> keyword. Now it's time to level up with more sophisticated looping constructs, learn how
+            to store multiple values in collections, and unlock the power of Rust's <code>match</code> expression for
+            pattern matching.
+        </p>
+
+        <h2>Program 1: Conditional Loops with while</h2>
+
+        <p>The <code>while</code> loop repeats code as long as a condition remains true. Unlike <code>loop</code>, which
+            requires an explicit <code>break</code>, <code>while</code> checks its condition before each iteration.</p>
+
+        <pre><code class="language-rust">
+fn main() {
+    let mut countdown = 5;
+    
+    println!("Starting countdown...");
+    while countdown &gt; 0 {
+        println!("{}", countdown);
+        countdown -= 1;
+    }
+    println!("Liftoff! 🚀");
+    
+    // Using while for input validation
+    let mut attempts = 0;
+    let password = "rust123";
+    let mut user_input = "wrong";
+    
+    while user_input != password &amp;&amp; attempts &lt; 3 {
+        println!("Attempt {}: Access denied", attempts + 1);
+        attempts += 1;
+        
+        // Simulating different inputs
+        if attempts == 2 {
+            user_input = "rust123"; // Correct on third try
+        }
+    }
+    
+    if user_input == password {
+        println!("Access granted!");
+    } else {
+        println!("Too many failed attempts.");
+    }
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>while Loop</strong>: Continues executing as long as the condition is <code>true</code>. The
+                condition is checked <em>before</em> each iteration.</li>
+            <li><strong>Compound Conditions</strong>: Using <code>&&</code> (AND) to combine multiple conditions. Both
+                must be true for the loop to continue.</li>
+            <li><strong>Decrement Operator</strong>: <code>countdown -= 1</code> is shorthand for
+                <code>countdown = countdown - 1</code>.
+            </li>
+            <li><strong>Loop Guards</strong>: The condition acts as a "guard" that prevents the loop from running when
+                it's no longer needed.</li>
+        </ul>
+
+        <h3>Output</h3>
+
+        <pre><code class="language-">
+Starting countdown...
+5
+4
+3
+2
+1
+Liftoff! 🚀
+Attempt 1: Access denied
+Attempt 2: Access denied
+Attempt 3: Access denied
+Access granted!
+</code></pre>
+
+        <hr>
+
+        <h2>Program 2: Iterating with for Loops</h2>
+
+        <p>The <code>for</code> loop is the most common way to iterate over a collection or a range of numbers. It's
+            safer and more concise than <code>while</code> for most iteration tasks.</p>
+
+        <pre><code class="language-rust">
+fn main() {
+    // Iterating over a range
+    println!("Counting from 1 to 5:");
+    for number in 1..6 {
+        println!("{}", number);
+    }
+    
+    // Reverse iteration
+    println!("\nCountdown:");
+    for number in (1..6).rev() {
+        println!("{}", number);
+    }
+    println!("Liftoff! 🚀");
+    
+    // Inclusive range
+    println!("\nInclusive range (1 to 5):");
+    for number in 1..=5 {
+        println!("{}", number);
+    }
+    
+    // Using for with step
+    println!("\nEven numbers from 0 to 10:");
+    for number in (0..=10).step_by(2) {
+        println!("{}", number);
+    }
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>Range Syntax</strong>: <code>1..6</code> creates a range from 1 to 5 (exclusive of the end).
+                <code>1..=5</code> is inclusive of both ends.
+            </li>
+            <li><strong>rev() Method</strong>: Reverses the order of iteration.</li>
+            <li><strong>step_by() Method</strong>: Allows you to skip values in a range (e.g., count by 2s).</li>
+            <li><strong>Automatic Iteration</strong>: The <code>for</code> loop automatically handles the iteration
+                logic, making it less error-prone than manual counter management.</li>
+            <li><strong>Immutable Loop Variable</strong>: The loop variable (<code>number</code>) is immutable within
+                each iteration.</li>
+        </ul>
+
+        <h3>Output</h3>
+
+        <pre><code class="language-">
+Counting from 1 to 5:
+1
+2
+3
+4
+5
+
+Countdown:
+5
+4
+3
+2
+1
+Liftoff! 🚀
+
+Inclusive range (1 to 5):
+1
+2
+3
+4
+5
+
+Even numbers from 0 to 10:
+0
+2
+4
+6
+8
+10
+</code></pre>
+
+        <hr>
+
+        <h2>Program 3: Storing Multiple Values with Arrays</h2>
+
+        <p>Arrays allow you to store multiple values of the same type in a single variable. Arrays in Rust have a fixed
+            size that must be known at compile time.</p>
+
+        <pre><code class="language-rust">
+fn main() {
+    // Declaring an array
+    let numbers = [1, 2, 3, 4, 5];
+    
+    // Accessing array elements (zero-indexed)
+    println!("First element: {}", numbers[0]);
+    println!("Third element: {}", numbers[2]);
+    
+    // Array with type annotation
+    let floats: [f64; 3] = [1.5, 2.7, 3.9];
+    println!("Float array: {:?}", floats);
+    
+    // Array with repeated values
+    let zeros = [0; 5]; // Creates [0, 0, 0, 0, 0]
+    println!("Zeros: {:?}", zeros);
+    
+    // Iterating over an array
+    println!("\nIterating over numbers:");
+    for num in numbers.iter() {
+        println!("{}", num);
+    }
+    
+    // Getting array length
+    println!("\nArray length: {}", numbers.len());
+    
+    // Calculating sum
+    let mut sum = 0;
+    for num in numbers.iter() {
+        sum += num;
+    }
+    println!("Sum of numbers: {}", sum);
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>Array Declaration</strong>: <code>[value1, value2, ...]</code> creates an array. All elements
+                must be the same type.</li>
+            <li><strong>Type Annotation</strong>: <code>[type; length]</code> specifies the element type and array size.
+            </li>
+            <li><strong>Zero-Indexed</strong>: The first element is at index 0, the second at index 1, etc.</li>
+            <li><strong>Fixed Size</strong>: Array size cannot change after creation. The size is part of the type.</li>
+            <li><strong>Debug Formatting</strong>: <code>{:?}</code> prints the entire array for debugging purposes.
+            </li>
+            <li><strong>Initialization Syntax</strong>: <code>[value; count]</code> creates an array with
+                <code>count</code> copies of <code>value</code>.
+            </li>
+            <li><strong>iter() Method</strong>: Creates an iterator over the array elements.</li>
+        </ul>
+
+        <h3>Output</h3>
+
+        <pre><code class="language-">
+First element: 1
+Third element: 3
+Float array: [1.5, 2.7, 3.9]
+Zeros: [0, 0, 0, 0, 0]
+
+Iterating over numbers:
+1
+2
+3
+4
+5
+
+Array length: 5
+Sum of numbers: 15
+</code></pre>
+
+        <hr>
+
+        <h2>Program 4: Grouping Different Types with Tuples</h2>
+
+        <p>Tuples allow you to group together values of different types. Unlike arrays, tuples can have mixed types and
+            are accessed by position rather than index.</p>
+
+        <pre><code class="language-rust">
+fn main() {
+    // Creating a tuple
+    let person = ("Alice", 25, 5.6);
+    
+    // Accessing tuple elements with dot notation
+    println!("Name: {}", person.0);
+    println!("Age: {}", person.1);
+    println!("Height: {} feet", person.2);
+    
+    // Destructuring a tuple
+    let (name, age, height) = person;
+    println!("\nDestructured: {} is {} years old and {} feet tall", name, age, height);
+    
+    // Tuple with type annotation
+    let coordinates: (f64, f64) = (40.7128, -74.0060);
+    println!("\nNew York coordinates: {:?}", coordinates);
+    
+    // Nested tuples
+    let nested = ((1, 2), (3, 4));
+    println!("Nested tuple: {:?}", nested);
+    println!("Accessing nested: {}", (nested.0).1);
+    
+    // Function returning a tuple
+    fn calculate_stats(numbers: [i32; 5]) -&gt; (i32, i32, f64) {
+        let mut sum = 0;
+        let mut min = numbers[0];
+        let mut max = numbers[0];
+        
+        for &amp;num in numbers.iter() {
+            sum += num;
+            if num &lt; min { min = num; }
+            if num &gt; max { max = num; }
+        }
+        
+        let average = sum as f64 / numbers.len() as f64;
+        (min, max, average)
+    }
+    
+    let data = [10, 25, 5, 30, 15];
+    let (min, max, avg) = calculate_stats(data);
+    println!("\nStats for {:?}:", data);
+    println!("Min: {}, Max: {}, Average: {:.2}", min, max, avg);
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>Tuple Declaration</strong>: <code>(value1, value2, ...)</code> creates a tuple. Values can be
+                different types.</li>
+            <li><strong>Accessing Elements</strong>: Use <code>.0</code>, <code>.1</code>, <code>.2</code>, etc. to
+                access tuple elements by position.</li>
+            <li><strong>Destructuring</strong>: Assign tuple elements to individual variables in one statement.</li>
+            <li><strong>Multiple Return Values</strong>: Tuples are commonly used to return multiple values from a
+                function.</li>
+            <li><strong>Type Annotations</strong>: <code>(type1, type2, ...)</code> specifies the types of tuple
+                elements.</li>
+            <li><strong>Reference Operator</strong>: <code>&num</code> in the for loop creates a reference to avoid
+                moving the value.</li>
+        </ul>
+
+        <h3>Output</h3>
+
+        <pre><code class="language-">
+Name: Alice
+Age: 25
+Height: 5.6 feet
+
+Destructured: Alice is 25 years old and 5.6 feet tall
+
+New York coordinates: (40.7128, -74.006)
+
+Nested tuple: ((1, 2), (3, 4))
+Accessing nested: 2
+
+Stats for [10, 25, 5, 30, 15]:
+Min: 5, Max: 30, Average: 17.00
+</code></pre>
+
+        <hr>
+
+        <h2>Program 5: Pattern Matching with match</h2>
+
+        <p>The <code>match</code> expression is one of Rust's most powerful features. It allows you to compare a value
+            against a series of patterns and execute code based on which pattern matches.</p>
+
+        <pre><code class="language-rust">
+fn main() {
+    // Basic match with integers
+    let number = 7;
+    
+    match number {
+        1 =&gt; println!("One!"),
+        2 | 3 | 5 | 7 | 11 =&gt; println!("{} is a prime number", number),
+        13..=19 =&gt; println!("{} is a teen", number),
+        _ =&gt; println!("{} is something else", number),
+    }
+    
+    // Match with multiple statements
+    let day = 3;
+    
+    match day {
+        1 =&gt; {
+            println!("Monday - Start of the work week");
+            println!("Time to be productive!");
+        },
+        2..=5 =&gt; println!("Weekday"),
+        6 | 7 =&gt; println!("Weekend!"),
+        _ =&gt; println!("Invalid day"),
+    }
+    
+    // Match as an expression
+    let grade_number = 85;
+    let letter_grade = match grade_number {
+        90..=100 =&gt; 'A',
+        80..=89 =&gt; 'B',
+        70..=79 =&gt; 'C',
+        60..=69 =&gt; 'D',
+        _ =&gt; 'F',
+    };
+    println!("Grade: {}", letter_grade);
+    
+    // Match with tuples
+    let point = (0, 5);
+    
+    match point {
+        (0, 0) =&gt; println!("Origin"),
+        (0, y) =&gt; println!("On the y-axis at y = {}", y),
+        (x, 0) =&gt; println!("On the x-axis at x = {}", x),
+        (x, y) =&gt; println!("Point at ({}, {})", x, y),
+    }
+    
+    // Match with enums (simple example)
+    enum Coin {
+        Penny,
+        Nickel,
+        Dime,
+        Quarter,
+    }
+    
+    fn value_in_cents(coin: Coin) -&gt; u8 {
+        match coin {
+            Coin::Penny =&gt; 1,
+            Coin::Nickel =&gt; 5,
+            Coin::Dime =&gt; 10,
+            Coin::Quarter =&gt; 25,
+        }
+    }
+    
+    let my_coin = Coin::Quarter;
+    println!("Coin value: {} cents", value_in_cents(my_coin));
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>match Expression</strong>: Compares a value against patterns and executes the code for the first
+                matching pattern.</li>
+            <li><strong>Arms</strong>: Each pattern and its code form a "match arm", written as
+                <code>pattern => code</code>.
+            </li>
+            <li><strong>Multiple Patterns</strong>: Use <code>|</code> to match multiple patterns in one arm (like an OR
+                operator).</li>
+            <li><strong>Range Patterns</strong>: <code>13..=19</code> matches any value from 13 to 19 inclusive.</li>
+            <li><strong>Catch-All Pattern</strong>: <code>_</code> matches anything and is typically used as the last
+                arm.</li>
+            <li><strong>Exhaustiveness</strong>: <code>match</code> must cover all possible values. The compiler will
+                error if you miss a case.</li>
+            <li><strong>Binding Variables</strong>: Patterns can bind parts of the matched value to variables (like
+                <code>y</code> in <code>(0, y)</code>).
+            </li>
+            <li><strong>Enums</strong>: Custom types that can be one of several variants. Perfect for use with
+                <code>match</code>.
+            </li>
+        </ul>
+
+        <h3>Output</h3>
+
+        <pre><code class="language-">
+7 is a prime number
+Weekday
+Grade: B
+On the y-axis at y = 5
+Coin value: 25 cents
+</code></pre>
+
+        <hr>
+
+        <h2>Summary & Key Takeaways</h2>
+
+        <p>You've now mastered essential Rust concepts for working with collections and control flow:</p>
+
+        <ul>
+            <li><strong>while Loops</strong>: Repeat code while a condition is true.</li>
+            <li><strong>for Loops</strong>: Iterate over ranges and collections safely and concisely.</li>
+            <li><strong>Arrays</strong>: Store multiple values of the same type with a fixed size.</li>
+            <li><strong>Tuples</strong>: Group values of different types together.</li>
+            <li><strong>match Expressions</strong>: Powerful pattern matching for handling multiple cases elegantly.
+            </li>
+        </ul>
+
+        <h3>Important Points to Remember</h3>
+
+        <ul>
+            <li><strong>Choosing Loops</strong>: Use <code>for</code> when you know how many times to iterate,
+                <code>while</code> when you have a condition, and <code>loop</code> when you need an infinite loop with
+                manual breaks.
+            </li>
+            <li><strong>Array Bounds</strong>: Accessing an array out of bounds will cause a panic. Always ensure your
+                index is valid.</li>
+            <li><strong>Tuple Size</strong>: Tuples can have up to 12 elements, but it's best to keep them small for
+                readability.</li>
+            <li><strong>match Exhaustiveness</strong>: The compiler ensures you handle all cases, preventing bugs.</li>
+            <li><strong>Pattern Matching Power</strong>: <code>match</code> is more powerful than <code>if/else</code>
+                chains for complex conditional logic.</li>
+        </ul>
+
+        <h3>Try It Yourself! 🚀</h3>
+
+        <p>1. <strong>Modify Program 2</strong>: Create a multiplication table for numbers 1-10 using nested
+            <code>for</code> loops.
+        </p>
+        <p>2. <strong>Extend Program 3</strong>: Write a function that finds the maximum value in an array without using
+            built-in methods.</p>
+        <p>3. <strong>Enhance Program 4</strong>: Create a function that takes a tuple of three integers and returns
+            them sorted in a new tuple.</p>
+        <p>4. <strong>Challenge</strong>: Write a program that uses <code>match</code> to implement a simple calculator.
+            It should take a tuple of <code>(number1, operator, number2)</code> where operator is a <code>char</code>
+            ('+', '-', '*', '/') and return the result.</p>
+
+        <h2>Next Steps</h2>
+
+        <p>In the next lesson, we'll explore:</p>
+
+        <ul>
+            <li>Ownership and borrowing - Rust's unique memory management system</li>
+            <li>References and slices</li>
+            <li>The String type vs string slices</li>
+            <li>Understanding the stack and heap</li>
+        </ul>
+
+        <p><strong>Happy Coding! 🦀</strong></p>
+
+    </div>
+    <div class="lesson-divider">• • •</div>
+    <div id="lesson-7">
+        <h1>Rust Programming Lesson 6: Ownership, Borrowing, and References</h1>
+
+        <p>Welcome to Lesson 6! This is where Rust truly sets itself apart from other programming languages. Ownership
+            is Rust's most unique feature, and it's what enables Rust to guarantee memory safety without needing a
+            garbage collector. At first, these concepts might seem challenging, but they're the key to writing safe,
+            efficient code.</p>
+
+        <h2>Understanding the Problem: Memory Management</h2>
+
+        <p>Before we dive into Rust's solution, let's understand the problem. In programming, we need to manage memory:
+        </p>
+        <ul>
+            <li><strong>Manual management</strong> (like C): Fast but error-prone. You can forget to free memory (memory
+                leaks) or free it twice (crashes).</li>
+            <li><strong>Garbage collection</strong> (like Java, Python): Safe but slower. A background process cleans up
+                unused memory.</li>
+            <li><strong>Rust's approach</strong>: Ownership rules checked at compile time. Safe AND fast!</li>
+        </ul>
+
+        <hr>
+
+        <h2>Program 1: Ownership Basics - Move Semantics</h2>
+
+        <p>Ownership is a set of rules that govern how Rust manages memory. Let's see these rules in action.</p>
+
+        <pre><code class="language-rust">
+fn main() {
+    // Rule 1: Each value has a single owner
+    let s1 = String::from("hello");
+    println!("s1: {}", s1);
+    
+    // Rule 2: When the owner goes out of scope, the value is dropped
+    {
+        let s2 = String::from("inner scope");
+        println!("s2: {}", s2);
+    } // s2 is dropped here
+    
+    // This would error - s2 is no longer valid
+    // println!("{}", s2);
+    
+    // Rule 3: There can only be one owner at a time
+    let s3 = String::from("world");
+    let s4 = s3; // s3's value MOVES to s4
+    
+    println!("s4: {}", s4);
+    
+    // This would error - s3 is no longer valid!
+    // println!("s3: {}", s3);
+    
+    // Integers and other simple types are copied, not moved
+    let x = 5;
+    let y = x; // x is copied to y
+    
+    println!("x: {}, y: {}", x, y); // Both are valid!
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>Ownership Rules</strong>:</li>
+            <li><strong>Move Semantics</strong>: When you assign a <code>String</code> (or other heap-allocated type) to
+                another variable, ownership moves. The original variable becomes invalid.</li>
+            <li><strong>Copy Types</strong>: Simple types like integers, floats, and booleans implement the
+                <code>Copy</code> trait, so they're copied instead of moved.
+            </li>
+            <li><strong>Scope</strong>: Variables are valid from the point they're declared until the end of their scope
+                (usually marked by <code>}</code>).</li>
+        </ul>
+
+        <h3>Output</h3>
+
+        <pre><code class="language-">
+s1: hello
+s2: inner scope
+s4: world
+x: 5, y: 5
+</code></pre>
+
+        <hr>
+
+        <h2>Program 2: Ownership and Functions</h2>
+
+        <p>When you pass a value to a function, ownership is transferred (moved) to that function.</p>
+
+        <pre><code class="language-rust">
+fn main() {
+    let s = String::from("hello");
+    
+    takes_ownership(s); // s's value moves into the function
+    
+    // This would error - s is no longer valid
+    // println!("{}", s);
+    
+    let x = 5;
+    makes_copy(x); // x is copied into the function
+    
+    println!("x is still valid: {}", x); // This works!
+    
+    // Getting ownership back with return values
+    let s1 = String::from("world");
+    let s2 = takes_and_gives_back(s1); // s1 moves in, return value moves to s2
+    
+    println!("s2: {}", s2);
+}
+
+fn takes_ownership(some_string: String) {
+    println!("Function received: {}", some_string);
+} // some_string goes out of scope and is dropped
+
+fn makes_copy(some_integer: i32) {
+    println!("Function received: {}", some_integer);
+} // some_integer goes out of scope, but nothing special happens (it's just a copy)
+
+fn takes_and_gives_back(a_string: String) -&gt; String {
+    println!("Processing: {}", a_string);
+    a_string // Return ownership to the caller
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>Function Parameters</strong>: Passing a value to a function transfers ownership (for non-Copy
+                types).</li>
+            <li><strong>Return Values</strong>: Functions can return ownership back to the caller.</li>
+            <li><strong>Copy vs. Move</strong>: Copy types (like <code>i32</code>) are copied when passed to functions,
+                so the original remains valid.</li>
+            <li><strong>Tedious Pattern</strong>: Having to return ownership every time is tedious. This is where
+                references come in!</li>
+        </ul>
+
+        <h3>Output</h3>
+
+        <pre><code class="language-">
+Function received: hello
+Function received: 5
+x is still valid: 5
+Processing: world
+s2: world
+</code></pre>
+
+        <hr>
+
+        <h2>Program 3: References and Borrowing</h2>
+
+        <p>References allow you to refer to a value without taking ownership of it. This is called "borrowing."</p>
+
+        <pre><code class="language-rust">
+fn main() {
+    let s1 = String::from("hello");
+    
+    let len = calculate_length(&amp;s1); // Pass a reference
+    
+    println!("The length of '{}' is {}", s1, len); // s1 is still valid!
+    
+    // Multiple immutable references are allowed
+    let r1 = &amp;s1;
+    let r2 = &amp;s1;
+    println!("r1: {}, r2: {}", r1, r2);
+    
+    // Demonstrating borrowing with different types
+    let numbers = [1, 2, 3, 4, 5];
+    let sum = sum_array(&amp;numbers);
+    println!("Sum of {:?} is {}", numbers, sum); // numbers still valid
+}
+
+fn calculate_length(s: &amp;String) -&gt; usize {
+    s.len()
+} // s goes out of scope, but it doesn't own the String, so nothing is dropped
+
+fn sum_array(arr: &amp;[i32; 5]) -&gt; i32 {
+    let mut total = 0;
+    for &amp;num in arr.iter() {
+        total += num;
+    }
+    total
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>References</strong>: Created with <code>&</code>. They allow you to refer to a value without
+                taking ownership.</li>
+            <li><strong>Borrowing</strong>: When a function takes a reference as a parameter, we say it "borrows" the
+                value.</li>
+            <li><strong>Immutable References</strong>: By default, references are immutable. You can have multiple
+                immutable references to the same value.</li>
+            <li><strong>Reference Syntax</strong>: <code>&variable</code> creates a reference, <code>&Type</code> is the
+                type of a reference.</li>
+            <li><strong>No Ownership Transfer</strong>: When a reference goes out of scope, the value it points to is
+                not dropped.</li>
+        </ul>
+
+        <h3>Output</h3>
+
+        <pre><code class="language-">
+The length of 'hello' is 5
+r1: hello, r2: hello
+Sum of [1, 2, 3, 4, 5] is 15
+</code></pre>
+
+        <hr>
+
+        <h2>Program 4: Mutable References</h2>
+
+        <p>Sometimes you need to modify a borrowed value. Mutable references allow this, but with strict rules.</p>
+
+        <pre><code class="language-rust">
+fn main() {
+    let mut s = String::from("hello");
+    
+    println!("Before: {}", s);
+    change(&amp;mut s); // Pass a mutable reference
+    println!("After: {}", s);
+    
+    // Rule: You can have only ONE mutable reference at a time
+    let r1 = &amp;mut s;
+    append_exclamation(r1);
+    // Can't use r1 here anymore because it was used above
+    
+    println!("Final: {}", s);
+    
+    // Demonstrating the restriction
+    let mut x = 5;
+    {
+        let r1 = &amp;mut x;
+        *r1 += 10; // Dereference with * to modify the value
+    } // r1 goes out of scope here
+    
+    // Now we can create another mutable reference
+    let r2 = &amp;mut x;
+    *r2 += 5;
+    
+    println!("x: {}", x);
+}
+
+fn change(some_string: &amp;mut String) {
+    some_string.push_str(", world");
+}
+
+fn append_exclamation(some_string: &amp;mut String) {
+    some_string.push('!');
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>Mutable References</strong>: Created with <code>&mut</code>. Allow you to modify the borrowed
+                value.</li>
+            <li><strong>One Mutable Reference Rule</strong>: You can have only ONE mutable reference to a value in a
+                particular scope.</li>
+            <li><strong>No Mixing</strong>: You cannot have a mutable reference while immutable references exist.</li>
+            <li><strong>Dereferencing</strong>: Use <code>*</code> to access/modify the value behind a reference.</li>
+            <li><strong>Data Race Prevention</strong>: These rules prevent data races at compile time!</li>
+        </ul>
+
+        <h3>Output</h3>
+
+        <pre><code class="language-">
+Before: hello
+After: hello, world
+Final: hello, world!
+x: 20
+</code></pre>
+
+        <hr>
+
+        <h2>Program 5: String Slices</h2>
+
+        <p>A string slice is a reference to part of a String. It's one of the most common uses of references.</p>
+
+        <pre><code class="language-rust">
+fn main() {
+    let s = String::from("hello world");
+    
+    // String slices
+    let hello = &amp;s[0..5];  // "hello"
+    let world = &amp;s[6..11]; // "world"
+    
+    println!("First word: {}", hello);
+    println!("Second word: {}", world);
+    
+    // Shorthand syntax
+    let hello2 = &amp;s[..5];  // Same as [0..5]
+    let world2 = &amp;s[6..];  // From 6 to the end
+    let entire = &amp;s[..];   // The entire string
+    
+    println!("Entire: {}", entire);
+    
+    // Practical use: finding the first word
+    let sentence = String::from("The quick brown fox");
+    let first = first_word(&amp;sentence);
+    println!("First word of '{}' is '{}'", sentence, first);
+    
+    // String literals are slices!
+    let literal = "Hello, Rustaceans!"; // Type is &amp;str
+    println!("Literal: {}", literal);
+    
+    // Array slices work too
+    let numbers = [1, 2, 3, 4, 5];
+    let slice = &amp;numbers[1..4]; // [2, 3, 4]
+    println!("Array slice: {:?}", slice);
+}
+
+fn first_word(s: &amp;String) -&gt; &amp;str {
+    let bytes = s.as_bytes();
+    
+    for (i, &amp;item) in bytes.iter().enumerate() {
+        if item == b' ' { // b' ' is a byte literal for space
+            return &amp;s[0..i];
+        }
+    }
+    
+    &amp;s[..] // Return the whole string if no space found
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>String Slices</strong>: Written as <code>&str</code>, they're references to a portion of a
+                String.</li>
+            <li><strong>Slice Syntax</strong>: <code>&s[start..end]</code> creates a slice from index <code>start</code>
+                to <code>end-1</code> (exclusive end).</li>
+            <li><strong>Slice Shortcuts</strong>: <code>&s[..n]</code> starts from 0, <code>&s[n..]</code> goes to the
+                end, <code>&s[..]</code> is the entire string.</li>
+            <li><strong>String Literals</strong>: String literals like <code>"hello"</code> are actually slices
+                (<code>&str</code>) pointing to the binary.</li>
+            <li><strong>Immutable References</strong>: Slices are always immutable references.</li>
+            <li><strong>Array Slices</strong>: The same syntax works for arrays, creating <code>&[T]</code> slices.</li>
+        </ul>
+
+        <h3>Output</h3>
+
+        <pre><code class="language-">
+First word: hello
+Second word: world
+Entire: hello world
+First word of 'The quick brown fox' is 'The'
+Literal: Hello, Rustaceans!
+Array slice: [2, 3, 4]
+</code></pre>
+
+        <hr>
+
+        <h2>Program 6: Putting It All Together - A Text Analyzer</h2>
+
+        <p>This program demonstrates ownership, borrowing, and slices working together in a practical example.</p>
+
+        <pre><code class="language-rust">
+fn main() {
+    let text = String::from("Rust is a systems programming language focused on safety");
+    
+    println!("Analyzing: '{}'", text);
+    println!("─────────────────────────────────────────────────────");
+    
+    // Borrowing for analysis
+    let word_count = count_words(&amp;text);
+    let char_count = count_characters(&amp;text);
+    let longest = find_longest_word(&amp;text);
+    
+    println!("Word count: {}", word_count);
+    println!("Character count: {}", char_count);
+    println!("Longest word: '{}'", longest);
+    
+    // text is still valid because we only borrowed it
+    println!("\nOriginal text still accessible: '{}'", text);
+    
+    // Modifying the text
+    let mut mutable_text = text; // Ownership moves
+    add_emphasis(&amp;mut mutable_text);
+    println!("Modified text: '{}'", mutable_text);
+}
+
+fn count_words(s: &amp;String) -&gt; usize {
+    s.split_whitespace().count()
+}
+
+fn count_characters(s: &amp;String) -&gt; usize {
+    s.chars().count()
+}
+
+fn find_longest_word(s: &amp;String) -&gt; &amp;str {
+    let mut longest = "";
+    
+    for word in s.split_whitespace() {
+        if word.len() &gt; longest.len() {
+            longest = word;
+        }
+    }
+    
+    longest
+}
+
+fn add_emphasis(s: &amp;mut String) {
+    s.push_str(" 🦀");
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>Combining Concepts</strong>: This program uses immutable borrowing for analysis and mutable
+                borrowing for modification.</li>
+            <li><strong>Lifetime Relationship</strong>: The returned slice from <code>find_longest_word</code> is tied
+                to the input string's lifetime.</li>
+            <li><strong>Ownership Transfer</strong>: <code>let mut mutable_text = text</code> moves ownership, making
+                <code>text</code> invalid afterward.
+            </li>
+            <li><strong>Method Chaining</strong>: Methods like <code>split_whitespace()</code> and <code>count()</code>
+                work on borrowed values.</li>
+            <li><strong>Real-World Pattern</strong>: Analyze with immutable borrows, modify with mutable borrows.</li>
+        </ul>
+
+        <h3>Output</h3>
+
+        <pre><code class="language-">
+Analyzing: 'Rust is a systems programming language focused on safety'
+─────────────────────────────────────────────────────────────────────
+Word count: 9
+Character count: 57
+Longest word: 'programming'
+
+Original text still accessible: 'Rust is a systems programming language focused on safety'
+Modified text: 'Rust is a systems programming language focused on safety 🦀'
+</code></pre>
+
+        <hr>
+
+        <h2>Summary & Key Takeaways</h2>
+
+        <p>You've now learned Rust's most distinctive feature - the ownership system:</p>
+
+        <ul>
+            <li><strong>Ownership</strong>: Each value has one owner; when the owner goes out of scope, the value is
+                dropped.</li>
+            <li><strong>Move Semantics</strong>: Non-Copy types transfer ownership when assigned or passed to functions.
+            </li>
+            <li><strong>Borrowing</strong>: References (<code>&T</code>) let you use a value without taking ownership.
+            </li>
+            <li><strong>Mutable References</strong>: <code>&mut T</code> allows modification, but only one at a time.
+            </li>
+            <li><strong>Slices</strong>: References to contiguous sequences, like <code>&str</code> for strings and
+                <code>&[T]</code> for arrays.
+            </li>
+        </ul>
+
+        <h3>The Borrowing Rules (Memorize These!)</h3>
+
+        <p>At any given time, you can have EITHER:</p>
+        <ul>
+            <li>One mutable reference (<code>&mut T</code>), OR</li>
+            <li>Any number of immutable references (<code>&T</code>)</li>
+        </ul>
+
+        <p>Additionally:</p>
+        <ul>
+            <li>References must always be valid (no dangling references)</li>
+        </ul>
+
+        <h3>Why This Matters</h3>
+
+        <p>These rules eliminate entire classes of bugs at compile time:</p>
+        <ul>
+            <li><strong>No null pointer errors</strong>: References are always valid</li>
+            <li><strong>No data races</strong>: Mutable access is exclusive</li>
+            <li><strong>No use-after-free</strong>: Ownership tracking prevents it</li>
+            <li><strong>No memory leaks</strong>: Values are automatically cleaned up</li>
+        </ul>
+
+        <h3>Try It Yourself! 🚀</h3>
+
+        <p>1. <strong>Modify Program 2</strong>: Create a function that takes ownership of a String, converts it to
+            uppercase, and returns it.</p>
+        <p>2. <strong>Extend Program 3</strong>: Write a function that takes a reference to an array and returns a
+            reference to the smallest element.</p>
+        <p>3. <strong>Challenge Program 4</strong>: Create a function that takes a mutable reference to a vector of
+            integers and removes all even numbers.</p>
+        <p>4. <strong>Advanced Challenge</strong>: Write a function
+            <code>find_word(text: &str, position: usize) -> Option<&str></code> that returns the nth word in a string,
+            or <code>None</code> if it doesn't exist.
+        </p>
+
+        <h2>Next Steps</h2>
+
+        <p>In the next lesson, we'll explore:</p>
+
+        <ul>
+            <li>Structs - Creating custom data types</li>
+            <li>Methods and associated functions</li>
+            <li>Implementing functionality for your own types</li>
+            <li>Tuple structs and unit-like structs</li>
+        </ul>
+
+        <p><strong>Happy Coding! 🦀</strong></p>
+
+    </div>
+    <div class="lesson-divider">• • •</div>
+    <div id="lesson-8">
+        <h1>Rust Programming Lesson 7: Structs and Methods</h1>
+
+        <p>Welcome to Lesson 7! Now that you understand ownership and borrowing, you're ready to create your own custom
+            data types. Structs allow you to package related data together, and methods let you define behavior for
+            those types. This is where you start building real, organized programs!</p>
+
+        <h2>Program 1: Defining and Using Structs</h2>
+
+        <p>A struct (short for "structure") lets you create a custom type by grouping related values together. Think of
+            it as a blueprint for your data.</p>
+
+        <pre><code class="language-rust">
+// Define a struct
+struct User {
+    username: String,
+    email: String,
+    age: u32,
+    active: bool,
+}
+
+fn main() {
+    // Create an instance of the struct
+    let user1 = User {
+        username: String::from("rustacean42"),
+        email: String::from("rustacean@example.com"),
+        age: 25,
+        active: true,
+    };
+    
+    // Access struct fields with dot notation
+    println!("Username: {}", user1.username);
+    println!("Email: {}", user1.email);
+    println!("Age: {}", user1.age);
+    println!("Active: {}", user1.active);
+    
+    // Mutable struct
+    let mut user2 = User {
+        username: String::from("coder_jane"),
+        email: String::from("jane@example.com"),
+        age: 30,
+        active: true,
+    };
+    
+    // Modify a field
+    user2.email = String::from("jane.new@example.com");
+    println!("\nUpdated email: {}", user2.email);
+    
+    // Note: The entire instance must be mutable, not individual fields
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>Struct Definition</strong>: Use the <code>struct</code> keyword followed by a name and field
+                definitions in curly braces.</li>
+            <li><strong>Field Syntax</strong>: Each field has a name and a type, separated by a colon.</li>
+            <li><strong>Creating Instances</strong>: Use the struct name followed by curly braces with field values.
+            </li>
+            <li><strong>Field Access</strong>: Use dot notation (<code>.</code>) to access struct fields.</li>
+            <li><strong>Mutability</strong>: To modify fields, the entire struct instance must be declared as
+                <code>mut</code>.
+            </li>
+            <li><strong>Naming Convention</strong>: Struct names use <code>PascalCase</code> (capitalize each word).
+            </li>
+        </ul>
+
+        <h3>Output</h3>
+
+        <pre><code class="language-">
+Username: rustacean42
+Email: rustacean@example.com
+Age: 25
+Active: true
+
+Updated email: jane.new@example.com
+</code></pre>
+
+        <hr>
+
+        <h2>Program 2: Struct Update Syntax and Functions</h2>
+
+        <p>Rust provides convenient syntax for creating struct instances and working with them in functions.</p>
+
+        <pre><code class="language-rust">
+struct Point {
+    x: f64,
+    y: f64,
+}
+
+fn main() {
+    let point1 = Point { x: 3.0, y: 4.0 };
+    
+    // Struct update syntax - create a new instance using values from another
+    let point2 = Point {
+        x: 5.0,
+        ..point1  // Use remaining fields from point1
+    };
+    
+    println!("Point 1: ({}, {})", point1.x, point1.y);
+    println!("Point 2: ({}, {})", point2.x, point2.y);
+    
+    // Using a function to create structs
+    let point3 = create_point(10.0, 20.0);
+    println!("Point 3: ({}, {})", point3.x, point3.y);
+    
+    // Field init shorthand
+    let x = 7.0;
+    let y = 8.0;
+    let point4 = Point { x, y }; // Shorthand when variable names match field names
+    println!("Point 4: ({}, {})", point4.x, point4.y);
+    
+    // Passing structs to functions
+    let distance = calculate_distance(point1, point3);
+    println!("Distance: {:.2}", distance);
+    
+    // Note: point1 and point3 are no longer valid (moved into function)
+}
+
+fn create_point(x: f64, y: f64) -&gt; Point {
+    Point { x, y } // Field init shorthand
+}
+
+fn calculate_distance(p1: Point, p2: Point) -&gt; f64 {
+    let dx = p2.x - p1.x;
+    let dy = p2.y - p1.y;
+    (dx * dx + dy * dy).sqrt()
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>Struct Update Syntax</strong>: <code>..other_struct</code> copies remaining fields from another
+                instance.</li>
+            <li><strong>Field Init Shorthand</strong>: When variable names match field names, you can write
+                <code>Point { x, y }</code> instead of <code>Point { x: x, y: y }</code>.
+            </li>
+            <li><strong>Constructor Functions</strong>: Functions that return struct instances are common (though not
+                special in Rust).</li>
+            <li><strong>Ownership with Structs</strong>: Passing a struct to a function moves ownership (unless it
+                implements <code>Copy</code>).</li>
+            <li><strong>Copy Trait</strong>: Structs containing only <code>Copy</code> types can derive
+                <code>Copy</code>, but those with <code>String</code> cannot.
+            </li>
+        </ul>
+
+        <h3>Output</h3>
+
+        <pre><code class="language-">
+Point 1: (3, 4)
+Point 2: (5, 4)
+Point 3: (10, 20)
+Point 4: (7, 8)
+Distance: 16.76
+</code></pre>
+
+        <hr>
+
+        <h2>Program 3: Methods - Adding Behavior to Structs</h2>
+
+        <p>Methods are functions defined within the context of a struct. They always take <code>self</code> as their
+            first parameter.</p>
+
+        <pre><code class="language-rust">
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+impl Rectangle {
+    // Method that borrows self immutably
+    fn area(&amp;self) -&gt; u32 {
+        self.width * self.height
+    }
+    
+    // Method that borrows self immutably
+    fn perimeter(&amp;self) -&gt; u32 {
+        2 * (self.width + self.height)
+    }
+    
+    // Method that takes another Rectangle as a parameter
+    fn can_hold(&amp;self, other: &amp;Rectangle) -&gt; bool {
+        self.width &gt; other.width &amp;&amp; self.height &gt; other.height
+    }
+    
+    // Method that borrows self mutably
+    fn scale(&amp;mut self, factor: u32) {
+        self.width *= factor;
+        self.height *= factor;
+    }
+}
+
+fn main() {
+    let rect1 = Rectangle {
+        width: 30,
+        height: 50,
+    };
+    
+    println!("Rectangle: {} x {}", rect1.width, rect1.height);
+    println!("Area: {}", rect1.area());
+    println!("Perimeter: {}", rect1.perimeter());
+    
+    let rect2 = Rectangle {
+        width: 10,
+        height: 40,
+    };
+    
+    let rect3 = Rectangle {
+        width: 60,
+        height: 45,
+    };
+    
+    println!("\nCan rect1 hold rect2? {}", rect1.can_hold(&amp;rect2));
+    println!("Can rect1 hold rect3? {}", rect1.can_hold(&amp;rect3));
+    
+    // Using a mutable method
+    let mut rect4 = Rectangle {
+        width: 5,
+        height: 10,
+    };
+    
+    println!("\nBefore scaling: {} x {}", rect4.width, rect4.height);
+    rect4.scale(3);
+    println!("After scaling by 3: {} x {}", rect4.width, rect4.height);
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>impl Block</strong>: Use <code>impl StructName</code> to define methods for a struct.</li>
+            <li><strong>&self Parameter</strong>: Methods take <code>&self</code> (immutable borrow),
+                <code>&mut self</code> (mutable borrow), or <code>self</code> (takes ownership).
+            </li>
+            <li><strong>Method Syntax</strong>: Call methods with dot notation: <code>rect.area()</code>.</li>
+            <li><strong>Automatic Referencing</strong>: Rust automatically adds <code>&</code>, <code>&mut</code>, or
+                <code>*</code> to match the method signature.
+            </li>
+            <li><strong>Multiple Parameters</strong>: Methods can take additional parameters after <code>self</code>.
+            </li>
+            <li><strong>Multiple impl Blocks</strong>: You can have multiple <code>impl</code> blocks for the same
+                struct (though usually one is enough).</li>
+        </ul>
+
+        <h3>Output</h3>
+
+        <pre><code class="language-">
+Rectangle: 30 x 50
+Area: 1500
+Perimeter: 160
+
+Can rect1 hold rect2? true
+Can rect1 hold rect3? false
+
+Before scaling: 5 x 10
+After scaling by 3: 15 x 30
+</code></pre>
+
+        <hr>
+
+        <h2>Program 4: Associated Functions</h2>
+
+        <p>Associated functions are defined in an <code>impl</code> block but don't take <code>self</code> as a
+            parameter. They're often used as constructors.</p>
+
+        <pre><code class="language-rust">
+struct Circle {
+    radius: f64,
+}
+
+impl Circle {
+    // Associated function (constructor)
+    fn new(radius: f64) -&gt; Circle {
+        Circle { radius }
+    }
+    
+    // Another associated function
+    fn unit_circle() -&gt; Circle {
+        Circle { radius: 1.0 }
+    }
+    
+    // Method
+    fn area(&amp;self) -&gt; f64 {
+        std::f64::consts::PI * self.radius * self.radius
+    }
+    
+    // Method
+    fn circumference(&amp;self) -&gt; f64 {
+        2.0 * std::f64::consts::PI * self.radius
+    }
+    
+    // Method that consumes self and returns a new Circle
+    fn resize(self, new_radius: f64) -&gt; Circle {
+        Circle { radius: new_radius }
+    }
+}
+
+fn main() {
+    // Using associated functions (called with ::)
+    let circle1 = Circle::new(5.0);
+    let circle2 = Circle::unit_circle();
+    
+    println!("Circle 1 - Radius: {}", circle1.radius);
+    println!("  Area: {:.2}", circle1.area());
+    println!("  Circumference: {:.2}", circle1.circumference());
+    
+    println!("\nCircle 2 - Radius: {}", circle2.radius);
+    println!("  Area: {:.2}", circle2.area());
+    
+    // Using a consuming method
+    let circle3 = Circle::new(3.0);
+    let circle4 = circle3.resize(7.0);
+    
+    // circle3 is no longer valid (moved into resize)
+    println!("\nResized circle - Radius: {}", circle4.radius);
+    println!("  Area: {:.2}", circle4.area());
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>Associated Functions</strong>: Functions in an <code>impl</code> block that don't take
+                <code>self</code>.
+            </li>
+            <li><strong>Calling Syntax</strong>: Use <code>::</code> to call associated functions:
+                <code>Circle::new(5.0)</code>.
+            </li>
+            <li><strong>Constructor Pattern</strong>: <code>new</code> is a common name for constructor functions (but
+                not enforced by Rust).</li>
+            <li><strong>Consuming Methods</strong>: Methods that take <code>self</code> (not <code>&self</code>) consume
+                the instance.</li>
+            <li><strong>Namespacing</strong>: Associated functions are namespaced under the struct name.</li>
+        </ul>
+
+        <h3>Output</h3>
+
+        <pre><code class="language-">
+Circle 1 - Radius: 5
+  Area: 78.54
+  Circumference: 31.42
+
+Circle 2 - Radius: 1
+  Area: 3.14
+
+Resized circle - Radius: 7
+  Area: 153.94
+</code></pre>
+
+        <hr>
+
+        <h2>Program 5: Tuple Structs and Unit-Like Structs</h2>
+
+        <p>Rust has two special kinds of structs for specific use cases.</p>
+
+        <pre><code class="language-rust">
+// Tuple struct - fields have no names
+struct Color(u8, u8, u8);
+struct Point3D(f64, f64, f64);
+
+// Unit-like struct - no fields at all
+struct AlwaysEqual;
+
+fn main() {
+    // Creating tuple structs
+    let black = Color(0, 0, 0);
+    let white = Color(255, 255, 255);
+    let red = Color(255, 0, 0);
+    
+    // Accessing tuple struct fields by index
+    println!("Red color: RGB({}, {}, {})", red.0, red.1, red.2);
+    
+    // Destructuring tuple structs
+    let Color(r, g, b) = white;
+    println!("White color: RGB({}, {}, {})", r, g, b);
+    
+    // Tuple structs create distinct types
+    let origin = Point3D(0.0, 0.0, 0.0);
+    let point = Point3D(3.5, 4.2, 1.8);
+    
+    println!("Point: ({}, {}, {})", point.0, point.1, point.2);
+    
+    // Unit-like struct
+    let subject = AlwaysEqual;
+    
+    // Useful for implementing traits without data
+    println!("Unit-like struct created");
+}
+
+// You can implement methods for tuple structs too
+impl Color {
+    fn new(r: u8, g: u8, b: u8) -&gt; Color {
+        Color(r, g, b)
+    }
+    
+    fn is_grayscale(&amp;self) -&gt; bool {
+        self.0 == self.1 &amp;&amp; self.1 == self.2
+    }
+}
+
+impl Point3D {
+    fn distance_from_origin(&amp;self) -&gt; f64 {
+        (self.0 * self.0 + self.1 * self.1 + self.2 * self.2).sqrt()
+    }
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>Tuple Structs</strong>: Structs with unnamed fields, accessed by index like tuples.</li>
+            <li><strong>Type Distinction</strong>: <code>Color(0, 0, 0)</code> and <code>Point3D(0.0, 0.0, 0.0)</code>
+                are different types, even with similar data.</li>
+            <li><strong>Destructuring</strong>: You can destructure tuple structs just like regular tuples.</li>
+            <li><strong>Unit-Like Structs</strong>: Structs with no fields, useful for implementing traits.</li>
+            <li><strong>Use Cases</strong>: Tuple structs are good for simple wrappers; unit-like structs for marker
+                types.</li>
+        </ul>
+
+        <h3>Output</h3>
+
+        <pre><code class="language-">
+Red color: RGB(255, 0, 0)
+White color: RGB(255, 255, 255)
+Point: (3.5, 4.2, 1.8)
+Unit-like struct created
+</code></pre>
+
+        <hr>
+
+        <h2>Program 6: Practical Example - A Simple Bank Account</h2>
+
+        <p>Let's put everything together with a realistic example that demonstrates structs, methods, and associated
+            functions.</p>
+
+        <pre><code class="language-rust">
+struct BankAccount {
+    account_number: String,
+    holder_name: String,
+    balance: f64,
+}
+
+impl BankAccount {
+    // Associated function - constructor
+    fn new(account_number: String, holder_name: String) -&gt; BankAccount {
+        BankAccount {
+            account_number,
+            holder_name,
+            balance: 0.0,
+        }
+    }
+    
+    // Associated function - constructor with initial deposit
+    fn with_balance(account_number: String, holder_name: String, initial_balance: f64) -&gt; BankAccount {
+        BankAccount {
+            account_number,
+            holder_name,
+            balance: initial_balance,
+        }
+    }
+    
+    // Method - deposit money
+    fn deposit(&amp;mut self, amount: f64) {
+        if amount &gt; 0.0 {
+            self.balance += amount;
+            println!("Deposited ${:.2}. New balance: ${:.2}", amount, self.balance);
+        } else {
+            println!("Invalid deposit amount");
+        }
+    }
+    
+    // Method - withdraw money
+    fn withdraw(&amp;mut self, amount: f64) -&gt; bool {
+        if amount &gt; 0.0 &amp;&amp; amount &lt;= self.balance {
+            self.balance -= amount;
+            println!("Withdrew ${:.2}. New balance: ${:.2}", amount, self.balance);
+            true
+        } else {
+            println!("Insufficient funds or invalid amount");
+            false
+        }
+    }
+    
+    // Method - check balance
+    fn check_balance(&amp;self) {
+        println!("Account {}: ${:.2}", self.account_number, self.balance);
+    }
+    
+    // Method - display account info
+    fn display_info(&amp;self) {
+        println!("─────────────────────────────");
+        println!("Account Number: {}", self.account_number);
+        println!("Holder: {}", self.holder_name);
+        println!("Balance: ${:.2}", self.balance);
+        println!("─────────────────────────────");
+    }
+}
+
+fn main() {
+    // Create accounts using associated functions
+    let mut account1 = BankAccount::new(
+        String::from("ACC001"),
+        String::from("Alice Johnson")
+    );
+    
+    let mut account2 = BankAccount::with_balance(
+        String::from("ACC002"),
+        String::from("Bob Smith"),
+        1000.0
+    );
+    
+    // Display initial state
+    account1.display_info();
+    account2.display_info();
+    
+    // Perform transactions on account1
+    println!("\n--- Account 1 Transactions ---");
+    account1.deposit(500.0);
+    account1.deposit(250.0);
+    account1.withdraw(100.0);
+    account1.check_balance();
+    
+    // Perform transactions on account2
+    println!("\n--- Account 2 Transactions ---");
+    account2.withdraw(300.0);
+    account2.deposit(150.0);
+    account2.withdraw(2000.0); // Should fail
+    account2.check_balance();
+    
+    // Final state
+    println!("\n--- Final Account States ---");
+    account1.display_info();
+    account2.display_info();
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>Real-World Modeling</strong>: Structs model real-world entities with data and behavior.</li>
+            <li><strong>Encapsulation</strong>: Methods provide a clean interface for interacting with struct data.</li>
+            <li><strong>Multiple Constructors</strong>: Associated functions can provide different ways to create
+                instances.</li>
+            <li><strong>Validation Logic</strong>: Methods can include validation (like checking for sufficient funds).
+            </li>
+            <li><strong>State Management</strong>: Mutable methods (<code>&mut self</code>) modify the struct's state.
+            </li>
+            <li><strong>Information Hiding</strong>: Users interact through methods, not direct field access (though
+                Rust doesn't enforce privacy here yet).</li>
+        </ul>
+
+        <h3>Output</h3>
+
+        <pre><code class="language-">
+─────────────────────────────
+Account Number: ACC001
+Holder: Alice Johnson
+Balance: $0.00
+─────────────────────────────
+─────────────────────────────
+Account Number: ACC002
+Holder: Bob Smith
+Balance: $1000.00
+─────────────────────────────
+
+--- Account 1 Transactions ---
+Deposited $500.00. New balance: $500.00
+Deposited $250.00. New balance: $750.00
+Withdrew $100.00. New balance: $650.00
+Account ACC001: $650.00
+
+--- Account 2 Transactions ---
+Withdrew $300.00. New balance: $700.00
+Deposited $150.00. New balance: $850.00
+Insufficient funds or invalid amount
+Account ACC002: $850.00
+
+--- Final Account States ---
+─────────────────────────────
+Account Number: ACC001
+Holder: Alice Johnson
+Balance: $650.00
+─────────────────────────────
+─────────────────────────────
+Account Number: ACC002
+Holder: Bob Smith
+Balance: $850.00
+─────────────────────────────
+</code></pre>
+
+        <hr>
+
+        <h2>Summary & Key Takeaways</h2>
+
+        <p>You've now learned how to create custom types and add behavior to them:</p>
+
+        <ul>
+            <li><strong>Structs</strong>: Group related data into custom types with named fields.</li>
+            <li><strong>Methods</strong>: Functions that operate on struct instances, taking <code>self</code> as the
+                first parameter.</li>
+            <li><strong>Associated Functions</strong>: Functions in an <code>impl</code> block that don't take
+                <code>self</code>, often used as constructors.
+            </li>
+            <li><strong>Tuple Structs</strong>: Structs with unnamed fields, accessed by index.</li>
+            <li><strong>Unit-Like Structs</strong>: Structs with no fields, useful for trait implementations.</li>
+        </ul>
+
+        <h3>The Three Forms of self</h3>
+
+        <ul>
+            <li><strong><code>&self</code></strong>: Borrows the instance immutably (read-only access)</li>
+            <li><strong><code>&mut self</code></strong>: Borrows the instance mutably (can modify fields)</li>
+            <li><strong><code>self</code></strong>: Takes ownership of the instance (consumes it)</li>
+        </ul>
+
+        <h3>Best Practices</h3>
+
+        <ul>
+            <li>Use <code>new</code> as a convention for constructor associated functions</li>
+            <li>Use <code>&self</code> by default; only use <code>&mut self</code> when you need to modify</li>
+            <li>Rarely use <code>self</code> (consuming methods) - only when transforming the instance</li>
+            <li>Group related functionality in <code>impl</code> blocks</li>
+            <li>Use tuple structs for simple wrappers around single values</li>
+        </ul>
+
+        <h3>Try It Yourself! 🚀</h3>
+
+        <p>1. <strong>Modify Program 3</strong>: Add a method to <code>Rectangle</code> that returns <code>true</code>
+            if it's a square.</p>
+        <p>2. <strong>Extend Program 4</strong>: Add a <code>scale</code> method to <code>Circle</code> that takes a
+            factor and returns a new <code>Circle</code> with the scaled radius.</p>
+        <p>3. <strong>Enhance Program 6</strong>: Add a <code>transfer</code> function that takes two mutable references
+            to <code>BankAccount</code> and transfers money between them.</p>
+        <p>4. <strong>Challenge</strong>: Create a <code>Book</code> struct with fields for title, author, pages, and
+            available. Implement methods for <code>checkout()</code>, <code>return_book()</code>, and
+            <code>display_info()</code>. Create a small library system with multiple books.
+        </p>
+
+        <h2>Next Steps</h2>
+
+        <p>In the next lesson, we'll explore:</p>
+
+        <ul>
+            <li>Enums - Types that can be one of several variants</li>
+            <li>The <code>Option</code> enum for handling absence of values</li>
+            <li>The <code>Result</code> enum for error handling</li>
+            <li>Pattern matching with enums</li>
+        </ul>
+
+        <p><strong>Happy Coding! 🦀</strong></p>
+
+    </div>
+    <div class="lesson-divider">• • •</div>
+    <div id="lesson-9">
+        <h1>Rust Programming Lesson 8: Enums and Pattern Matching</h1>
+
+        <p>Welcome to Lesson 8! Enums (enumerations) are one of Rust's most powerful features. They allow you to define
+            a type by enumerating its possible variants. Combined with pattern matching, enums enable you to write
+            expressive, safe code that handles all possible cases.</p>
+
+        <h2>Program 1: Basic Enums</h2>
+
+        <p>An enum defines a type that can be one of several variants. This is perfect for representing data that can be
+            one of a fixed set of options.</p>
+
+        <pre><code class="language-rust">
+// Define an enum
+enum TrafficLight {
+    Red,
+    Yellow,
+    Green,
+}
+
+enum Direction {
+    North,
+    South,
+    East,
+    West,
+}
+
+fn main() {
+    // Create enum values
+    let light = TrafficLight::Red;
+    let heading = Direction::North;
+    
+    // Using match with enums
+    match light {
+        TrafficLight::Red =&gt; println!("Stop!"),
+        TrafficLight::Yellow =&gt; println!("Slow down!"),
+        TrafficLight::Green =&gt; println!("Go!"),
+    }
+    
+    // Enums in functions
+    let action = get_action(heading);
+    println!("Action: {}", action);
+    
+    // Another example
+    let directions = [
+        Direction::North,
+        Direction::East,
+        Direction::South,
+        Direction::West,
+    ];
+    
+    println!("\nNavigating:");
+    for dir in directions.iter() {
+        print_direction(dir);
+    }
+}
+
+fn get_action(direction: Direction) -&gt; &amp;'static str {
+    match direction {
+        Direction::North =&gt; "Move forward",
+        Direction::South =&gt; "Move backward",
+        Direction::East =&gt; "Turn right",
+        Direction::West =&gt; "Turn left",
+    }
+}
+
+fn print_direction(direction: &amp;Direction) {
+    let name = match direction {
+        Direction::North =&gt; "North",
+        Direction::South =&gt; "South",
+        Direction::East =&gt; "East",
+        Direction::West =&gt; "West",
+    };
+    println!("Heading: {}", name);
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>Enum Definition</strong>: Use the <code>enum</code> keyword followed by variant names.</li>
+            <li><strong>Enum Values</strong>: Create values using <code>EnumName::Variant</code> syntax.</li>
+            <li><strong>Exhaustive Matching</strong>: <code>match</code> expressions must cover all variants (compiler
+                enforced).</li>
+            <li><strong>Type Safety</strong>: You can't accidentally use the wrong variant.</li>
+            <li><strong>Namespacing</strong>: Variants are namespaced under the enum name.</li>
+        </ul>
+
+        <h3>Output</h3>
+
+        <pre><code class="language-">
+Stop!
+Action: Move forward
+
+Navigating:
+Heading: North
+Heading: East
+Heading: South
+Heading: West
+</code></pre>
+
+        <hr>
+
+        <h2>Program 2: Enums with Data</h2>
+
+        <p>Enum variants can hold data! This makes them incredibly powerful for representing complex states.</p>
+
+        <pre><code class="language-rust">
+enum Message {
+    Quit,                       // No data
+    Move { x: i32, y: i32 },   // Named fields (like a struct)
+    Write(String),              // Single value
+    ChangeColor(u8, u8, u8),   // Multiple values (like a tuple)
+}
+
+impl Message {
+    fn process(&amp;self) {
+        match self {
+            Message::Quit =&gt; {
+                println!("Quit message received");
+            },
+            Message::Move { x, y } =&gt; {
+                println!("Move to coordinates: ({}, {})", x, y);
+            },
+            Message::Write(text) =&gt; {
+                println!("Text message: {}", text);
+            },
+            Message::ChangeColor(r, g, b) =&gt; {
+                println!("Change color to RGB({}, {}, {})", r, g, b);
+            },
+        }
+    }
+}
+
+fn main() {
+    let messages = vec![
+        Message::Quit,
+        Message::Move { x: 10, y: 20 },
+        Message::Write(String::from("Hello, Rust!")),
+        Message::ChangeColor(255, 0, 0),
+    ];
+    
+    println!("Processing messages:");
+    for msg in messages.iter() {
+        msg.process();
+    }
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>Variant Data</strong>: Variants can contain different types and amounts of data.</li>
+            <li><strong>Struct-Like Variants</strong>: Use <code>{ }</code> for named fields.</li>
+            <li><strong>Tuple-Like Variants</strong>: Use <code>( )</code> for unnamed fields.</li>
+            <li><strong>Unit Variants</strong>: No data at all (like <code>Quit</code>).</li>
+            <li><strong>Pattern Matching with Data</strong>: Extract data from variants using pattern matching.</li>
+            <li><strong>Methods on Enums</strong>: You can implement methods for enums just like structs.</li>
+        </ul>
+
+        <h3>Output</h3>
+
+        <pre><code class="language-">
+Processing messages:
+Quit message received
+Move to coordinates: (10, 20)
+Text message: Hello, Rust!
+Change color to RGB(255, 0, 0)
+</code></pre>
+
+        <hr>
+
+        <h2>Program 3: The Option Enum - Handling Absence</h2>
+
+        <p><code>Option<T></code> is Rust's way of representing a value that might not exist. It eliminates null pointer
+            errors!</p>
+
+        <pre><code class="language-rust">
+fn main() {
+    // Option can be Some(value) or None
+    let some_number = Some(5);
+    let some_string = Some("a string");
+    let absent_number: Option&lt;i32&gt; = None;
+    
+    println!("some_number: {:?}", some_number);
+    println!("absent_number: {:?}", absent_number);
+    
+    // Using match with Option
+    let x = Some(10);
+    match x {
+        Some(value) =&gt; println!("Got a value: {}", value),
+        None =&gt; println!("Got nothing"),
+    }
+    
+    // Practical example: finding an element
+    let numbers = [1, 2, 3, 4, 5];
+    let search_result = find_number(&amp;numbers, 3);
+    
+    match search_result {
+        Some(index) =&gt; println!("Found at index: {}", index),
+        None =&gt; println!("Not found"),
+    }
+    
+    let not_found = find_number(&amp;numbers, 10);
+    match not_found {
+        Some(index) =&gt; println!("Found at index: {}", index),
+        None =&gt; println!("Number 10 not found"),
+    }
+    
+    // Using if let for cleaner code when you only care about one case
+    let favorite_color: Option&lt;&amp;str&gt; = Some("blue");
+    
+    if let Some(color) = favorite_color {
+        println!("Your favorite color is: {}", color);
+    }
+    
+    // Option methods
+    let value = Some(42);
+    println!("Is some: {}", value.is_some());
+    println!("Is none: {}", value.is_none());
+    println!("Unwrap or default: {}", absent_number.unwrap_or(0));
+}
+
+fn find_number(arr: &amp;[i32], target: i32) -&gt; Option&lt;usize&gt; {
+    for (index, &amp;value) in arr.iter().enumerate() {
+        if value == target {
+            return Some(index);
+        }
+    }
+    None
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>Option<T></strong>: An enum with two variants: <code>Some(T)</code> and <code>None</code>.</li>
+            <li><strong>No Null</strong>: Rust doesn't have null. Use <code>Option</code> instead.</li>
+            <li><strong>Type Safety</strong>: You must handle both cases, preventing null pointer errors.</li>
+            <li><strong>if let</strong>: Syntactic sugar for matching when you only care about one variant.</li>
+            <li><strong>Useful Methods</strong>: <code>is_some()</code>, <code>is_none()</code>,
+                <code>unwrap_or()</code>, and many more.
+            </li>
+            <li><strong>Generic Type</strong>: The <code><T></code> means Option works with any type.</li>
+        </ul>
+
+        <h3>Output</h3>
+
+        <pre><code class="language-">
+some_number: Some(5)
+absent_number: None
+Got a value: 10
+Found at index: 2
+Number 10 not found
+Your favorite color is: blue
+Is some: true
+Is none: false
+Unwrap or default: 0
+</code></pre>
+
+        <hr>
+
+        <h2>Program 4: The Result Enum - Error Handling</h2>
+
+        <p><code>Result<T, E></code> is used for operations that might fail. It's Rust's primary error handling
+            mechanism.</p>
+
+        <pre><code class="language-rust">
+use std::fs::File;
+use std::io::ErrorKind;
+
+fn divide(a: f64, b: f64) -&gt; Result&lt;f64, String&gt; {
+    if b == 0.0 {
+        Err(String::from("Cannot divide by zero"))
+    } else {
+        Ok(a / b)
+    }
+}
+
+fn parse_number(s: &amp;str) -&gt; Result&lt;i32, String&gt; {
+    match s.parse::&lt;i32&gt;() {
+        Ok(num) =&gt; Ok(num),
+        Err(_) =&gt; Err(String::from("Failed to parse number")),
+    }
+}
+
+fn main() {
+    // Using Result with match
+    let result1 = divide(10.0, 2.0);
+    match result1 {
+        Ok(value) =&gt; println!("10 / 2 = {}", value),
+        Err(error) =&gt; println!("Error: {}", error),
+    }
+    
+    let result2 = divide(10.0, 0.0);
+    match result2 {
+        Ok(value) =&gt; println!("Result: {}", value),
+        Err(error) =&gt; println!("Error: {}", error),
+    }
+    
+    // Using if let with Result
+    if let Ok(value) = divide(20.0, 4.0) {
+        println!("20 / 4 = {}", value);
+    }
+    
+    // Parsing with Result
+    let valid_input = "42";
+    let invalid_input = "abc";
+    
+    match parse_number(valid_input) {
+        Ok(num) =&gt; println!("Parsed: {}", num),
+        Err(e) =&gt; println!("Error: {}", e),
+    }
+    
+    match parse_number(invalid_input) {
+        Ok(num) =&gt; println!("Parsed: {}", num),
+        Err(e) =&gt; println!("Error: {}", e),
+    }
+    
+    // Using unwrap_or for default values
+    let good = divide(15.0, 3.0).unwrap_or(0.0);
+    let bad = divide(15.0, 0.0).unwrap_or(0.0);
+    println!("Good result: {}, Bad result: {}", good, bad);
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>Result<T, E></strong>: An enum with <code>Ok(T)</code> for success and <code>Err(E)</code> for
+                errors.</li>
+            <li><strong>Explicit Error Handling</strong>: You must handle both success and failure cases.</li>
+            <li><strong>Type Parameters</strong>: <code>T</code> is the success type, <code>E</code> is the error type.
+            </li>
+            <li><strong>No Exceptions</strong>: Rust doesn't have exceptions; use <code>Result</code> instead.</li>
+            <li><strong>Propagation</strong>: Errors can be propagated up the call stack (we'll see <code>?</code>
+                operator later).</li>
+            <li><strong>Methods</strong>: <code>unwrap_or()</code>, <code>is_ok()</code>, <code>is_err()</code>, and
+                more.</li>
+        </ul>
+
+        <h3>Output</h3>
+
+        <pre><code class="language-">
+10 / 2 = 5
+Error: Cannot divide by zero
+20 / 4 = 5
+Parsed: 42
+Error: Failed to parse number
+Good result: 5, Bad result: 0
+</code></pre>
+
+        <hr>
+
+        <h2>Program 5: Advanced Pattern Matching</h2>
+
+        <p>Pattern matching is incredibly powerful. Let's explore advanced techniques.</p>
+
+        <pre><code class="language-rust">
+enum Coin {
+    Penny,
+    Nickel,
+    Dime,
+    Quarter(UsState),
+}
+
+#[derive(Debug)]
+enum UsState {
+    Alabama,
+    Alaska,
+    California,
+    Texas,
+}
+
+fn value_in_cents(coin: Coin) -&gt; u8 {
+    match coin {
+        Coin::Penny =&gt; {
+            println!("Lucky penny!");
+            1
+        },
+        Coin::Nickel =&gt; 5,
+        Coin::Dime =&gt; 10,
+        Coin::Quarter(state) =&gt; {
+            println!("State quarter from {:?}!", state);
+            25
+        },
+    }
+}
+
+fn main() {
+    let coin1 = Coin::Penny;
+    let coin2 = Coin::Quarter(UsState::Alaska);
+    
+    println!("Coin 1 value: {} cents", value_in_cents(coin1));
+    println!("Coin 2 value: {} cents", value_in_cents(coin2));
+    
+    // Matching with Option
+    let five = Some(5);
+    let six = plus_one(five);
+    let none = plus_one(None);
+    
+    println!("five: {:?}, six: {:?}, none: {:?}", five, six, none);
+    
+    // Using _ placeholder
+    let some_value = 7;
+    match some_value {
+        1 =&gt; println!("one"),
+        3 =&gt; println!("three"),
+        5 =&gt; println!("five"),
+        7 =&gt; println!("seven"),
+        _ =&gt; println!("something else"),
+    }
+    
+    // Matching ranges
+    let age = 25;
+    match age {
+        0..=12 =&gt; println!("Child"),
+        13..=19 =&gt; println!("Teenager"),
+        20..=64 =&gt; println!("Adult"),
+        _ =&gt; println!("Senior"),
+    }
+    
+    // Multiple patterns
+    let number = 4;
+    match number {
+        1 | 2 =&gt; println!("One or two"),
+        3 | 4 | 5 =&gt; println!("Three, four, or five"),
+        _ =&gt; println!("Something else"),
+    }
+}
+
+fn plus_one(x: Option&lt;i32&gt;) -&gt; Option&lt;i32&gt; {
+    match x {
+        Some(i) =&gt; Some(i + 1),
+        None =&gt; None,
+    }
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>Nested Enums</strong>: Enums can contain other enums as data.</li>
+            <li><strong>Extracting Values</strong>: Pattern matching extracts data from enum variants.</li>
+            <li><strong>Multiple Statements</strong>: Match arms can contain multiple statements in <code>{ }</code>.
+            </li>
+            <li><strong>Placeholder <code>_</code></strong>: Matches anything, used as a catch-all.</li>
+            <li><strong>Range Patterns</strong>: Match ranges of values with <code>..=</code>.</li>
+            <li><strong>Multiple Patterns</strong>: Use <code>|</code> to match multiple patterns in one arm.</li>
+            <li><strong>Derive Debug</strong>: <code>#[derive(Debug)]</code> allows printing with <code>{:?}</code>.
+            </li>
+        </ul>
+
+        <h3>Output</h3>
+
+        <pre><code class="language-">
+Lucky penny!
+Coin 1 value: 1 cents
+State quarter from Alaska!
+Coin 2 value: 25 cents
+five: Some(5), six: Some(6), none: None
+seven
+Adult
+Three, four, or five
+</code></pre>
+
+        <hr>
+
+        <h2>Program 6: Building a Simple Game State Machine</h2>
+
+        <p>Let's create a practical example that uses enums to model a game's state.</p>
+
+        <pre><code class="language-rust">
+#[derive(Debug)]
+enum GameState {
+    Menu,
+    Playing { level: u32, score: u32 },
+    Paused { level: u32, score: u32 },
+    GameOver { final_score: u32 },
+}
+
+impl GameState {
+    fn new() -&gt; GameState {
+        GameState::Menu
+    }
+    
+    fn start_game(&amp;self) -&gt; GameState {
+        match self {
+            GameState::Menu =&gt; GameState::Playing { level: 1, score: 0 },
+            _ =&gt; {
+                println!("Can only start from menu");
+                GameState::Menu
+            }
+        }
+    }
+    
+    fn pause(&amp;self) -&gt; GameState {
+        match self {
+            GameState::Playing { level, score } =&gt; {
+                GameState::Paused { level: *level, score: *score }
+            },
+            _ =&gt; {
+                println!("Can only pause while playing");
+                self.clone()
+            }
+        }
+    }
+    
+    fn resume(&amp;self) -&gt; GameState {
+        match self {
+            GameState::Paused { level, score } =&gt; {
+                GameState::Playing { level: *level, score: *score }
+            },
+            _ =&gt; {
+                println!("Can only resume from pause");
+                self.clone()
+            }
+        }
+    }
+    
+    fn add_score(&amp;self, points: u32) -&gt; GameState {
+        match self {
+            GameState::Playing { level, score } =&gt; {
+                let new_score = score + points;
+                let new_level = if new_score &gt;= 100 { level + 1 } else { *level };
+                GameState::Playing { level: new_level, score: new_score }
+            },
+            _ =&gt; self.clone()
+        }
+    }
+    
+    fn game_over(&amp;self) -&gt; GameState {
+        match self {
+            GameState::Playing { score, .. } =&gt; GameState::GameOver { final_score: *score },
+            _ =&gt; self.clone()
+        }
+    }
+    
+    fn display(&amp;self) {
+        match self {
+            GameState::Menu =&gt; println!("📋 MENU - Press start to play"),
+            GameState::Playing { level, score } =&gt; {
+                println!("🎮 PLAYING - Level: {}, Score: {}", level, score)
+            },
+            GameState::Paused { level, score } =&gt; {
+                println!("⏸️  PAUSED - Level: {}, Score: {}", level, score)
+            },
+            GameState::GameOver { final_score } =&gt; {
+                println!("💀 GAME OVER - Final Score: {}", final_score)
+            },
+        }
+    }
+    
+    fn clone(&amp;self) -&gt; GameState {
+        match self {
+            GameState::Menu =&gt; GameState::Menu,
+            GameState::Playing { level, score } =&gt; {
+                GameState::Playing { level: *level, score: *score }
+            },
+            GameState::Paused { level, score } =&gt; {
+                GameState::Paused { level: *level, score: *score }
+            },
+            GameState::GameOver { final_score } =&gt; {
+                GameState::GameOver { final_score: *final_score }
+            },
+        }
+    }
+}
+
+fn main() {
+    println!("=== Game State Machine Demo ===\n");
+    
+    let mut state = GameState::new();
+    state.display();
+    
+    println!("\n--- Starting game ---");
+    state = state.start_game();
+    state.display();
+    
+    println!("\n--- Scoring points ---");
+    state = state.add_score(30);
+    state.display();
+    
+    state = state.add_score(50);
+    state.display();
+    
+    println!("\n--- Pausing game ---");
+    state = state.pause();
+    state.display();
+    
+    println!("\n--- Resuming game ---");
+    state = state.resume();
+    state.display();
+    
+    println!("\n--- More points ---");
+    state = state.add_score(40);
+    state.display();
+    
+    println!("\n--- Game over ---");
+    state = state.game_over();
+    state.display();
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>State Machines</strong>: Enums are perfect for modeling finite state machines.</li>
+            <li><strong>Immutable State Transitions</strong>: Methods return new states rather than modifying in place.
+            </li>
+            <li><strong>Data in States</strong>: Different states carry different data.</li>
+            <li><strong>Pattern Matching for Logic</strong>: Each method uses <code>match</code> to handle
+                state-specific behavior.</li>
+            <li><strong>Real-World Modeling</strong>: This pattern is common in games, UI, and protocols.</li>
+        </ul>
+
+        <h3>Output</h3>
+
+        <pre><code class="language-">
+=== Game State Machine Demo ===
+
+📋 MENU - Press start to play
+
+--- Starting game ---
+🎮 PLAYING - Level: 1, Score: 0
+
+--- Scoring points ---
+🎮 PLAYING - Level: 1, Score: 30
+🎮 PLAYING - Level: 2, Score: 80
+
+--- Pausing game ---
+⏸️  PAUSED - Level: 2, Score: 80
+
+--- Resuming game ---
+🎮 PLAYING - Level: 2, Score: 80
+
+--- More points ---
+🎮 PLAYING - Level: 3, Score: 120
+
+--- Game over ---
+💀 GAME OVER - Final Score: 120
+</code></pre>
+
+        <hr>
+
+        <h2>Summary & Key Takeaways</h2>
+
+        <p>You've now mastered enums and pattern matching in Rust:</p>
+
+        <ul>
+            <li><strong>Enums</strong>: Define types with multiple possible variants.</li>
+            <li><strong>Data in Variants</strong>: Variants can hold different types and amounts of data.</li>
+            <li><strong>Option<T></strong>: Rust's way of handling optional values (no null!).</li>
+            <li><strong>Result<T, E></strong>: Rust's primary error handling mechanism.</li>
+            <li><strong>Pattern Matching</strong>: Exhaustively handle all cases with <code>match</code>.</li>
+            <li><strong>if let</strong>: Cleaner syntax when you only care about one case.</li>
+        </ul>
+
+        <h3>The Power of Enums</h3>
+
+        <p>Enums + pattern matching eliminate entire classes of bugs:</p>
+        <ul>
+            <li><strong>No null pointer errors</strong>: Use <code>Option</code> instead</li>
+            <li><strong>Explicit error handling</strong>: Use <code>Result</code> instead of exceptions</li>
+            <li><strong>Exhaustive checking</strong>: Compiler ensures you handle all cases</li>
+            <li><strong>Type safety</strong>: Can't use the wrong variant</li>
+        </ul>
+
+        <h3>Common Patterns</h3>
+
+        <ul>
+            <li>Use <code>Option<T></code> when a value might not exist</li>
+            <li>Use <code>Result<T, E></code> for operations that might fail</li>
+            <li>Use custom enums to model state machines</li>
+            <li>Use <code>match</code> for exhaustive handling</li>
+            <li>Use <code>if let</code> when you only care about one variant</li>
+        </ul>
+
+        <h3>Try It Yourself! 🚀</h3>
+
+        <p>1. <strong>Modify Program 2</strong>: Add a new <code>Message</code> variant called
+            <code>Resize(u32, u32)</code> and handle it in the <code>process</code> method.
+        </p>
+        <p>2. <strong>Extend Program 3</strong>: Write a function that finds the maximum value in an array and returns
+            <code>Option<i32></code>.
+        </p>
+        <p>3. <strong>Enhance Program 4</strong>: Create a function that reads a file and returns
+            <code>Result<String, String></code> with appropriate error messages.
+        </p>
+        <p>4. <strong>Challenge</strong>: Create a traffic light system using enums. Model states (Red, Yellow, Green)
+            and implement a <code>next()</code> method that transitions to the next state. Add a timer field to each
+            state.</p>
+
+        <h2>Next Steps</h2>
+
+        <p>In the next lesson, we'll explore:</p>
+
+        <ul>
+            <li>Vectors - Growable arrays</li>
+            <li>HashMaps - Key-value storage</li>
+            <li>Iterators and closures</li>
+            <li>Working with collections efficiently</li>
+        </ul>
+
+        <p><strong>Happy Coding! 🦀</strong></p>
+
+    </div>
+    <div class="lesson-divider">• • •</div>
+    <div id="lesson-10">
+        <h1>Rust Programming Lesson 9: Collections - Vectors, Strings, and HashMaps</h1>
+
+        <p>Welcome to Lesson 9! Now it's time to explore Rust's dynamic collections that can grow and shrink at runtime.
+            These are essential tools for building real-world applications.</p>
+
+        <h2>Program 1: Vectors - Growable Arrays</h2>
+
+        <p>Vectors (<code>Vec<T></code>) are resizable arrays stored on the heap.</p>
+
+        <pre><code class="language-rust">
+fn main() {
+    // Creating vectors
+    let mut numbers: Vec&lt;i32&gt; = Vec::new();
+    numbers.push(1);
+    numbers.push(2);
+    numbers.push(3);
+    
+    // Using the vec! macro
+    let fruits = vec!["apple", "banana", "cherry"];
+    println!("Fruits: {:?}", fruits);
+    
+    // Accessing elements
+    let first = &amp;fruits[0];
+    println!("First: {}", first);
+    
+    // Safe access with get()
+    match fruits.get(10) {
+        Some(fruit) =&gt; println!("Fruit: {}", fruit),
+        None =&gt; println!("Index out of bounds"),
+    }
+    
+    // Iterating
+    for (i, fruit) in fruits.iter().enumerate() {
+        println!("{}: {}", i, fruit);
+    }
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>Vec<T></strong>: Growable array on the heap</li>
+            <li><strong>push/pop</strong>: Add/remove from end</li>
+            <li><strong>get()</strong>: Safe access returning <code>Option</code></li>
+            <li><strong>Indexing</strong>: <code>vec[i]</code> panics if out of bounds</li>
+        </ul>
+
+        <h3>Output</h3>
+        <pre><code class="language-">
+Fruits: ["apple", "banana", "cherry"]
+First: apple
+Index out of bounds
+0: apple
+1: banana
+2: cherry
+</code></pre>
+
+        <hr>
+
+        <h2>Program 2: Vector Operations</h2>
+
+        <pre><code class="language-rust">
+fn main() {
+    let mut scores = vec![95, 87, 92, 78, 88];
+    
+    // Statistics
+    let total: i32 = scores.iter().sum();
+    let avg = total as f64 / scores.len() as f64;
+    println!("Average: {:.2}", avg);
+    
+    // Filter and map
+    let passing: Vec&lt;i32&gt; = scores.iter()
+        .filter(|&amp;&amp;s| s &gt;= 80)
+        .map(|&amp;s| s)
+        .collect();
+    println!("Passing: {:?}", passing);
+    
+    // Sorting
+    scores.sort();
+    println!("Sorted: {:?}", scores);
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>Iterator methods</strong>: <code>sum()</code>, <code>filter()</code>, <code>map()</code>,
+                <code>collect()</code>
+            </li>
+            <li><strong>Closures</strong>: <code>|&&s| s >= 80</code></li>
+            <li><strong>sort()</strong>: In-place sorting</li>
+        </ul>
+
+        <hr>
+
+        <h2>Program 3: Strings</h2>
+
+        <pre><code class="language-rust">
+fn main() {
+    let mut s = String::from("Hello");
+    s.push_str(", world!");
+    println!("{}", s);
+    
+    // Concatenation
+    let s1 = String::from("Hello, ");
+    let s2 = String::from("world!");
+    let s3 = s1 + &amp;s2; // s1 moved
+    
+    // format! doesn't move
+    let game = format!("{}-{}-{}", "tic", "tac", "toe");
+    println!("{}", game);
+    
+    // Iteration
+    for c in "नमस्ते".chars() {
+        println!("{}", c);
+    }
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>String vs &str</strong>: Owned vs borrowed</li>
+            <li><strong>UTF-8</strong>: Characters can be multiple bytes</li>
+            <li><strong>No indexing</strong>: Use <code>chars()</code> or <code>bytes()</code></li>
+        </ul>
+
+        <hr>
+
+        <h2>Program 4: HashMaps</h2>
+
+        <pre><code class="language-rust">
+use std::collections::HashMap;
+
+fn main() {
+    let mut scores = HashMap::new();
+    scores.insert(String::from("Blue"), 10);
+    scores.insert(String::from("Red"), 50);
+    
+    // Access
+    if let Some(score) = scores.get("Blue") {
+        println!("Blue: {}", score);
+    }
+    
+    // Update or insert
+    scores.entry(String::from("Yellow")).or_insert(50);
+    
+    // Word count example
+    let text = "hello world wonderful world";
+    let mut map = HashMap::new();
+    for word in text.split_whitespace() {
+        let count = map.entry(word).or_insert(0);
+        *count += 1;
+    }
+    println!("{:?}", map);
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>HashMap<K, V></strong>: Key-value pairs</li>
+            <li><strong>entry().or_insert()</strong>: Insert if missing</li>
+            <li><strong>get()</strong>: Returns <code>Option<&V></code></li>
+        </ul>
+
+        <hr>
+
+        <h2>Program 5: Student Database</h2>
+
+        <pre><code class="language-rust">
+use std::collections::HashMap;
+
+struct Student {
+    name: String,
+    grades: Vec&lt;u32&gt;,
+}
+
+impl Student {
+    fn new(name: String) -&gt; Student {
+        Student { name, grades: Vec::new() }
+    }
+    
+    fn add_grade(&amp;mut self, grade: u32) {
+        self.grades.push(grade);
+    }
+    
+    fn average(&amp;self) -&gt; f64 {
+        if self.grades.is_empty() { return 0.0; }
+        let sum: u32 = self.grades.iter().sum();
+        sum as f64 / self.grades.len() as f64
+    }
+}
+
+fn main() {
+    let mut db: HashMap&lt;String, Student&gt; = HashMap::new();
+    
+    let mut alice = Student::new(String::from("Alice"));
+    alice.add_grade(95);
+    alice.add_grade(87);
+    db.insert(String::from("alice"), alice);
+    
+    for student in db.values() {
+        println!("{}: {:.2}", student.name, student.average());
+    }
+}
+</code></pre>
+
+        <h3>Key Concepts</h3>
+
+        <ul>
+            <li><strong>Nested collections</strong>: HashMap with Vec</li>
+            <li><strong>Real-world modeling</strong>: Combining types</li>
+        </ul>
+
+        <hr>
+
+        <h2>Summary</h2>
+
+        <ul>
+            <li><strong>Vec<T></strong>: Growable arrays</li>
+            <li><strong>String</strong>: UTF-8 text (Vec<u8>)</li>
+            <li><strong>HashMap<K, V></strong>: Key-value storage</li>
+        </ul>
+
+        <h3>Try It Yourself! 🚀</h3>
+
+        <p>1. Remove duplicates from a vector</p>
+        <p>2. Count vowels in a string</p>
+        <p>3. Build a phone book with HashMap</p>
+        <p>4. Create an inventory system</p>
+
+        <h2>Next Steps</h2>
+
+        <ul>
+            <li>Error handling with <code>?</code></li>
+            <li>Custom error types</li>
+            <li>Panic vs Result</li>
+        </ul>
+
+        <p><strong>Happy Coding! 🦀</strong></p>
+
+    </div>
+
+    <script>
+        // Add class to all h2 elements that start with "Program"
+        document.addEventListener('DOMContentLoaded', function () {
+            const h2Elements = document.querySelectorAll('h2');
+            h2Elements.forEach(function (h2) {
+                if (h2.textContent.trim().startsWith('Program')) {
+                    h2.classList.add('program-section');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
