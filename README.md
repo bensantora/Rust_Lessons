@@ -4,7 +4,4 @@ Ongoing Rust Course - each lesson is in raw markdown format - clone / download t
 
 ## How to Use These Lessons Here
 
-Simply click on each lesson file to read it directly here on thee GitHub site with full formatting:
-- [Lesson 1](./lesson-1.md)
-- [Lesson 2](./lesson-2.md)
-- etc.
+Simply click on each lesson file in the list to read it directly here on thee GitHub site with full formatting:
